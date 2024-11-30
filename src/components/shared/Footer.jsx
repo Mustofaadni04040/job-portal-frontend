@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 
-const disabledNavbar = ["sign-in", "sign-up"];
+const disabledFooter = ["sign-in", "sign-up", "browse", "profile", "recruiter"];
 
 export default function Footer() {
   const { pathname } = useLocation();
 
-  if (disabledNavbar.includes(pathname.split("/")[1])) {
+  if (disabledFooter.includes(pathname.split("/")[1])) {
     return null;
   }
 
@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-3 w-full justify-between py-10">
           <div className="max-w-96 mb-7">
-            <img src="./logo-job.png" alt="logo" className="w-28 h-auto" />
+            <img src="/logo-job.png" alt="logo" className="w-28 h-auto" />
             <p className="mt-3 text-sm text-slate-500">
               We help you to find your
               <br /> dream jobs.

@@ -8,8 +8,9 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "@/redux/authSlice";
+import { setLoading, setToken, setUser } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [input, setInput] = useState({
@@ -43,6 +44,11 @@ export default function Login() {
       );
 
       if (res.data.success) {
+        const token = Cookies.get("token");
+        Cookies.set("token", token); // simpan token ke cookies
+        Cookies.set("user", JSON.stringify(res.data.user));
+        dispatch(setToken(token));
+        dispatch(setUser(res.data.user));
         navigate("/");
         toast({
           title: "Success",
@@ -76,7 +82,7 @@ export default function Login() {
           <Label className="flex flex-col gap-2">
             Email
             <Input
-              type="text"
+              type="email"
               value={input.email}
               name="email"
               onChange={handleChangeInput}
@@ -154,7 +160,7 @@ export default function Login() {
         <p className="text-sm text-center">
           Don&apos;t have an account?,{" "}
           <span className="text-primary">
-            <Link to={"/sign-up"}>Sign in</Link>
+            <Link to={"/sign-up"}>Sign up</Link>
           </span>{" "}
           here
         </p>

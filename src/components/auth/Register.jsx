@@ -106,7 +106,7 @@ export default function Register() {
           <Label className="flex flex-col gap-2">
             Email
             <Input
-              type="text"
+              type="email"
               value={input.email}
               name="email"
               onChange={handleChangeInput}
@@ -119,7 +119,7 @@ export default function Register() {
           <Label className="flex flex-col gap-2">
             Phone Number
             <Input
-              type="number"
+              type="text"
               value={input.phoneNumber}
               name="phoneNumber"
               onChange={handleChangeInput}
