@@ -5,7 +5,11 @@ export default function HeroSection() {
     <div className="max-w-7xl mx-auto my-14">
       <div className="text-center">
         <h1 className="text-[42px] font-bold">
-          Find Your <span className="text-primary">Dream Jobs</span> Today
+          Unlock Your{" "}
+          <span className="bg-gradient-to-r from-primary to-[#e7407d] bg-clip-text text-transparent">
+            Career Potential
+          </span>{" "}
+          With Seeker
         </h1>
         <p className="text-md text-slate-500">
           Jobs in all of sectors are waiting for you.

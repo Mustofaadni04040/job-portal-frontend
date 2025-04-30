@@ -193,7 +193,7 @@ export default function Navbar() {
                 <Button variant="ghost">Sign in</Button>
               </Link>
               <Link to={"/sign-up"}>
-                <Button className="bg-primary shadow-md hover:bg-[#e7407d]">
+                <Button className="bg-gradient-to-r from-primary to-[#e7407d] hover:from-[#e7407d] hover:to-primary text-white">
                   Sign up
                 </Button>
               </Link>

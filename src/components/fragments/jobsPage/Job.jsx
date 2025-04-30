@@ -14,7 +14,7 @@ export default function Job({ data }) {
   const isArchived = false;
 
   return (
-    <div className="p-4 rounded-md shadow-md bg-white border border-gray-100 cursor-pointer">
+    <div className="p-4 flex flex-col justify-between rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <h1 className="text-xl font-medium">
@@ -66,11 +66,10 @@ export default function Job({ data }) {
         </p>
       </div>
 
-      <div className="flex items-center gap-2 mt-3">
-        <Button variant="outline">
+      <div className="mt-3">
+        <Button className="bg-primary hover:bg-[#e7407d]">
           <a href={`/job-details/${data?._id}`}>Details</a>
         </Button>
-        <Button className="bg-primary hover:bg-[#e7407d]">Apply</Button>
       </div>
     </div>
   );

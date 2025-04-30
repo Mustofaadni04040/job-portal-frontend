@@ -1,6 +1,14 @@
 import { Label } from "@/components/ui/label";
 import convertIDR from "@/utils/currency";
 import PropTypes from "prop-types";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { SlidersHorizontal } from "lucide-react";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 const filterData = [
   {
@@ -28,45 +36,89 @@ const filterData = [
     filterType: "Job Type",
     filterValue: ["Full Time", "Part Time", "Internship", "Feelance"],
   },
+  {
+    filterType: "Experience Level",
+    filterValue: [0, 1, 2, 3, 4, 5],
+  },
 ];
 
-export default function FilterJobs({ handleCheckboxChange }) {
+export default function FilterJobs({
+  handleCheckboxChange,
+  handleResetFilter,
+}) {
   return (
-    <div className="w-full h-screen overflow-y-auto border border-slate-200 rounded-md p-5">
-      <h1 className="text-xl font-bold mb-3">Prioritise By</h1>
-      {filterData.map((data, index) => (
-        <div key={index}>
-          <h2 className="text-lg font-medium">{data.filterType}</h2>
-          {data.filterValue.map((value, index) => {
-            const displayedValue =
-              data.filterType === "Salary"
-                ? `${value.min}-${value.max}`
-                : value;
+    <div className="w-full border border-slate-200 shadow-md rounded-xl p-5">
+      <div className="flex items-center gap-5">
+        {filterData.map((data, index) => (
+          <Popover key={index}>
+            <PopoverTrigger asChild>
+              <Button variant="outline">
+                {data.filterType} <SlidersHorizontal className="text-primary" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-60 h-60 overflow-y-auto">
+              <div className="grid gap-4">
+                <div className="flex items-start justify-between font-semibold">
+                  <h4 className="font-medium leading-none">
+                    Filter by {data.filterType}
+                  </h4>
 
-            return (
-              <div key={index} className="flex items-center space-x-2 my-2">
-                <input
-                  value={displayedValue}
-                  id={displayedValue}
-                  type="checkbox"
-                  onChange={() =>
-                    handleCheckboxChange(data.filterType, displayedValue)
-                  }
-                />
-                <Label htmlFor={displayedValue} className="text-md font-normal">
-                  {data.filterType === "Salary"
-                    ? `${convertIDR(value.min)} - ${convertIDR(value.max)}`
-                    : value}
-                </Label>
+                  <PopoverClose
+                    onClick={handleResetFilter}
+                    className="text-xs text-primary font-semibold"
+                  >
+                    Reset
+                  </PopoverClose>
+                </div>
+                <div className="grid gap-2">
+                  {data.filterValue.map((value, index) => {
+                    const displayedValue =
+                      data.filterType === "Salary"
+                        ? `${value.min}-${value.max}`
+                        : value;
+
+                    return (
+                      <div
+                        key={index}
+                        className="flex items-center space-x-2 my-2"
+                      >
+                        <input
+                          value={displayedValue}
+                          id={displayedValue}
+                          type="checkbox"
+                          onChange={() =>
+                            handleCheckboxChange(
+                              data.filterType,
+                              displayedValue
+                            )
+                          }
+                        />
+                        <Label
+                          htmlFor={displayedValue}
+                          className="text-sm font-normal"
+                        >
+                          {data.filterType === "Salary"
+                            ? `${convertIDR(value.min)} - ${convertIDR(
+                                value.max
+                              )}`
+                            : data.filterType === "Experience Level"
+                            ? `${value} ${value > 1 ? "Years" : "Year"}`
+                            : value}
+                        </Label>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            );
-          })}
-        </div>
-      ))}
+            </PopoverContent>
+          </Popover>
+        ))}
+      </div>
     </div>
   );
 }
 
 FilterJobs.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
+  handleResetFilter: PropTypes.func.isRequired,
 };

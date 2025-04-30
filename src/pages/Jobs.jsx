@@ -1,5 +1,6 @@
 import FilterJobs from "@/components/fragments/jobsPage/FilterJobs";
 import Job from "@/components/fragments/jobsPage/Job";
+import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -32,6 +33,15 @@ export default function Jobs() {
       );
     }
 
+    if (
+      selectedFilters["Experience Level"] &&
+      selectedFilters["Experience Level"].length > 0
+    ) {
+      filtered = filtered.filter((job) =>
+        selectedFilters["Experience Level"].includes(job.experienceLevel)
+      );
+    }
+
     setFilteredJobs(filtered);
   }, [allJobs, selectedFilters]);
 
@@ -47,18 +57,40 @@ export default function Jobs() {
     });
   };
 
+  const handleResetFilter = () => {
+    setSelectedFilters({});
+    setFilteredJobs(allJobs);
+  };
+
   return (
     <div className="max-w-7xl mx-auto my-10">
-      <div className="flex gap-5">
-        <div className="w-[20%] mb-5">
-          <FilterJobs handleCheckboxChange={handleCheckboxChange} />
+      <div className="flex flex-col gap-5">
+        <div className="">
+          <FilterJobs
+            handleCheckboxChange={handleCheckboxChange}
+            handleResetFilter={handleResetFilter}
+          />
         </div>
         {filteredJobs.length === 0 ? (
-          <div className="w-[80%]">
-            <p className="text-center text-xl font-medium">Job not found</p>
+          <div className="flex flex-col items-center">
+            <img
+              src="/not-found-logo.png"
+              alt="not-found-logo"
+              className="w-96 h-96"
+            />
+            <p className="text-center text-xl">
+              The job that you are looking for is not available 🙏😊
+            </p>
+            <Button
+              variant="secondary"
+              className="mt-5 bg-primary bg-opacity-10 hover:bg-opacity-10 hover:bg-primary text-primary"
+              onClick={handleResetFilter}
+            >
+              Show all jobs
+            </Button>
           </div>
         ) : (
-          <div className="w-[80%] flex-1 h-screen overflow-y-auto mb-5">
+          <div className="">
             <div className="grid grid-cols-3 gap-5">
               {filteredJobs.map((data, index) => (
                 <Job key={index} data={data} />

@@ -68,7 +68,7 @@ export default function ApplicantsTable() {
         </TableHeader>
 
         <TableBody>
-          {applicants.applications.length === 0 ? (
+          {applicants?.applications?.length === 0 ? (
             <TableRow>
               <TableCell colSpan={7} className="h-24 text-center">
                 <p>No applicants</p>
