@@ -9,6 +9,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
 import { PopoverClose } from "@radix-ui/react-popover";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const filterData = [
   {
@@ -45,10 +54,11 @@ const filterData = [
 export default function FilterJobs({
   handleCheckboxChange,
   handleResetFilter,
+  setSortFilterJobs,
 }) {
   return (
     <div className="w-full border border-slate-200 shadow-md rounded-xl p-5">
-      <div className="flex items-center gap-5">
+      <div className="grid grid-cols-6 gap-3">
         {filterData.map((data, index) => (
           <Popover key={index}>
             <PopoverTrigger asChild>
@@ -70,7 +80,7 @@ export default function FilterJobs({
                     Reset
                   </PopoverClose>
                 </div>
-                <div className="grid gap-2">
+                <div className="flex flex-col gap-2">
                   {data.filterValue.map((value, index) => {
                     const displayedValue =
                       data.filterType === "Salary"
@@ -113,6 +123,31 @@ export default function FilterJobs({
             </PopoverContent>
           </Popover>
         ))}
+
+        <div className="col-span-2 flex items-center gap-3">
+          <p className="text-sm font-semibold min-w-fit">Sort by</p>
+          <Select
+            onValueChange={(value) => setSortFilterJobs(value)}
+            className="col-span-2"
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <div className="flex items-center justify-between">
+                  <SelectLabel>Sort by</SelectLabel>
+                </div>
+                <SelectItem value="highestSalary" className="cursor-pointer">
+                  Highest Salary
+                </SelectItem>
+                <SelectItem value="latestPost" className="cursor-pointer">
+                  Latest Post
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </div>
   );
@@ -121,4 +156,5 @@ export default function FilterJobs({
 FilterJobs.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
   handleResetFilter: PropTypes.func.isRequired,
+  setSortFilterJobs: PropTypes.func.isRequired,
 };

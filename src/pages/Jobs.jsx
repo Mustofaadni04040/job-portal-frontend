@@ -8,6 +8,21 @@ export default function Jobs() {
   const { allJobs } = useSelector((store) => store.job);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [sortFilterJobs, setSortFilterJobs] = useState("");
+
+  const sortJobs = (jobs, sortBy) => {
+    if (sortBy === "highestSalary") {
+      return [...jobs].sort((a, b) => b.salary - a.salary);
+    }
+
+    if (sortBy === "latestPost") {
+      return [...jobs].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+    }
+
+    return jobs;
+  };
 
   useEffect(() => {
     let filtered = allJobs;
@@ -42,8 +57,10 @@ export default function Jobs() {
       );
     }
 
-    setFilteredJobs(filtered);
-  }, [allJobs, selectedFilters]);
+    const sorted = sortJobs(filtered, sortFilterJobs);
+
+    setFilteredJobs(sorted);
+  }, [allJobs, selectedFilters, sortFilterJobs]);
 
   const handleCheckboxChange = (filterType, filterValue) => {
     setSelectedFilters((prev) => {
@@ -63,12 +80,13 @@ export default function Jobs() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto my-10">
+    <div className="max-w-5xl mx-auto my-10">
       <div className="flex flex-col gap-5">
         <div className="">
           <FilterJobs
             handleCheckboxChange={handleCheckboxChange}
             handleResetFilter={handleResetFilter}
+            setSortFilterJobs={setSortFilterJobs}
           />
         </div>
         {filteredJobs.length === 0 ? (
