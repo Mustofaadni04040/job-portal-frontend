@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { SlidersHorizontal } from "lucide-react";
+import { BookMarked, SlidersHorizontal } from "lucide-react";
 import { PopoverClose } from "@radix-ui/react-popover";
 import {
   Select,
@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Search from "@/components/elements/Search";
 
 const filterData = [
   {
@@ -57,12 +58,19 @@ export default function FilterJobs({
   setSortFilterJobs,
 }) {
   return (
-    <div className="w-full border border-slate-200 shadow-md rounded-xl p-5">
+    <div className="w-full border border-slate-400 shadow-md rounded-xl p-5">
+      <div className="grid grid-cols-3 gap-1 mb-2">
+        <Search classname="col-span-2" />
+        <Button className="col-span-1 flex items-center gap-2 bg-primary hover:bg-[#e7407d]">
+          <BookMarked size={28} strokeWidth={3} />
+          Bookmark
+        </Button>
+      </div>
       <div className="grid grid-cols-6 gap-3">
         {filterData.map((data, index) => (
           <Popover key={index}>
             <PopoverTrigger asChild>
-              <Button variant="outline">
+              <Button variant="outline" className="border-slate-400">
                 {data.filterType} <SlidersHorizontal className="text-primary" />
               </Button>
             </PopoverTrigger>
@@ -124,13 +132,10 @@ export default function FilterJobs({
           </Popover>
         ))}
 
-        <div className="col-span-2 flex items-center gap-3">
+        <div className="col-span-2 ml-3 flex items-center gap-3">
           <p className="text-sm font-semibold min-w-fit">Sort by</p>
-          <Select
-            onValueChange={(value) => setSortFilterJobs(value)}
-            className="col-span-2"
-          >
-            <SelectTrigger>
+          <Select onValueChange={(value) => setSortFilterJobs(value)}>
+            <SelectTrigger className="border-slate-400">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>

@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { Popover } from "@radix-ui/react-popover";
+import { Popover, PopoverClose } from "@radix-ui/react-popover";
 import { ToastAction } from "@radix-ui/react-toast";
 import axios from "axios";
 import { Check, Ellipsis, X } from "lucide-react";
@@ -108,32 +108,36 @@ export default function ApplicantsTable() {
                   </div>
                 </TableCell>
                 <TableCell className="text-right">
-                  <Popover>
-                    <PopoverTrigger>
-                      <Ellipsis />
-                    </PopoverTrigger>
-                    <PopoverContent className="w-fit flex flex-col p-0">
-                      {actionStatus.map((status, index) => (
-                        <Button
-                          key={index}
-                          variant="ghost"
-                          className={`${
-                            status === "accepted"
-                              ? "rounded-bl-none rounded-br-none hover:bg-green-300"
-                              : "rounded-tl-none rounded-tr-none hover:bg-red-300"
-                          }`}
-                          onClick={() => handleStatus(status, applicant._id)}
-                        >
-                          {status === "accepted" ? (
-                            <Check className="font-bold" />
-                          ) : (
-                            <X className="font-bold" />
-                          )}
-                          <span>{status}</span>
-                        </Button>
-                      ))}
-                    </PopoverContent>
-                  </Popover>
+                  {applicant?.status === "pending" && (
+                    <Popover>
+                      <PopoverTrigger>
+                        <Ellipsis />
+                      </PopoverTrigger>
+                      <PopoverContent className="w-fit flex flex-col p-0">
+                        {actionStatus.map((status, index) => (
+                          <Button
+                            key={index}
+                            variant="ghost"
+                            className={`${
+                              status === "accepted"
+                                ? "rounded-bl-none rounded-br-none hover:bg-green-300"
+                                : "rounded-tl-none rounded-tr-none hover:bg-red-300"
+                            }`}
+                            onClick={() => handleStatus(status, applicant._id)}
+                          >
+                            <PopoverClose className="flex items-center gap-2">
+                              {status === "accepted" ? (
+                                <Check className="font-bold" />
+                              ) : (
+                                <X className="font-bold" />
+                              )}
+                              <span>{status}</span>
+                            </PopoverClose>
+                          </Button>
+                        ))}
+                      </PopoverContent>
+                    </Popover>
+                  )}
                 </TableCell>
               </TableRow>
             ))

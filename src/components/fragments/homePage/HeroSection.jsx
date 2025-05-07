@@ -1,5 +1,3 @@
-import Search from "@/components/elements/Search";
-
 export default function HeroSection() {
   return (
     <div className="max-w-7xl mx-auto my-14">
@@ -12,11 +10,9 @@ export default function HeroSection() {
           With Seeker
         </h1>
         <p className="text-md text-slate-500">
-          Jobs in all of sectors are waiting for you.
+          Browse thousands of career opportunities tailored for you.
         </p>
       </div>
-
-      <Search />
     </div>
   );
 }

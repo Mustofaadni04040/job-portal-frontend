@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { Bookmark, LogOut, User2 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { setToken, setUser } from "@/redux/authSlice";
 import { ToastAction } from "../ui/toast";
@@ -75,7 +75,7 @@ const HandleOpenPopover = ({ open, setOpen }) => {
                   ? user?.profile?.profilePhoto
                   : "https://github.com/shadcn.png"
               }
-              className="w-8 h-8 rounded-full"
+              className="min-w-8 h-8 rounded-full"
             />
           </Avatar>
           <div>
@@ -126,19 +126,36 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const { user } = useSelector((store) => store.auth);
   const [open, setOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  console.log(user);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
 
   if (disabledNavbar.includes(pathname.split("/")[1])) {
     return null;
   }
 
   return (
-    <div className="sticky left-0 top-0 w-full z-10 bg-white">
+    <div
+      className={`sticky left-0 top-0 w-full z-10 bg-white ${
+        isSticky ? "shadow-md" : ""
+      }`}
+    >
       <div className="flex items-center justify-between max-w-7xl mx-auto h-16 text-[#373C45]">
         <img src="/logo-job.png" alt="logo" className="w-28 h-auto" />
 
         <div className="flex items-center gap-20">
           <ul className="flex items-center gap-10">
-            {user && user?.role === "job-seeker" ? (
+            {(user && user?.role === "job-seeker") || user === null ? (
               NavUrl.map((item, index) => (
                 <a key={index} href={item.url}>
                   <li className={`${pathname === item.url && "text-primary"}`}>
