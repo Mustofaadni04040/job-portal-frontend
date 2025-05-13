@@ -18,11 +18,11 @@ import Cookies from "js-cookie";
 
 const NavUrl = [
   {
-    title: "Home",
+    title: "Beranda",
     url: "/",
   },
   {
-    title: "Jobs",
+    title: "Lowongan",
     url: "/all-jobs",
   },
 ];

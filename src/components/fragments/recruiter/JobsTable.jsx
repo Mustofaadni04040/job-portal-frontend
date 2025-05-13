@@ -25,8 +25,8 @@ export default function JobsTable() {
 
   useEffect(() => {
     const filteredJobs =
-      allRecruiterJobs.length > 0 &&
-      allRecruiterJobs.filter((job) => {
+      allRecruiterJobs?.length > 0 &&
+      allRecruiterJobs?.filter((job) => {
         if (!searchJob) {
           return true;
         }

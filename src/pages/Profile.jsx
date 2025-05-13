@@ -1,4 +1,5 @@
 import AppliedJobTable from "@/components/fragments/profilePage/AppliedJobTable";
+import UpdatePhotoModal from "@/components/fragments/profilePage/UpdatePhotoModal";
 import UpdateProfileModal from "@/components/fragments/profilePage/UpdateProfileModal";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -18,7 +19,9 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Profile() {
   const { user } = useSelector((store) => store.auth);
   const [openModal, setOpenModal] = useState(false);
+  const { jobsApplied } = useSelector((store) => store.job);
   const dispatch = useDispatch();
+  const [openModalPhoto, setOpenModalPhoto] = useState(false);
 
   useEffect(() => {
     const fetchAllAppliedJobs = async () => {
@@ -44,7 +47,7 @@ export default function Profile() {
     <div>
       <div className="relative max-w-4xl mx-auto border border-slate-200 rounded-xl my-5 p-8">
         <div className="flex gap-5">
-          <Avatar>
+          <Avatar className="relative">
             <AvatarImage
               src={
                 user?.profile?.profilePhoto
@@ -52,28 +55,29 @@ export default function Profile() {
                   : "https://github.com/shadcn.png"
               }
               alt="avatar"
-              className="w-20 h-20 rounded-full"
+              className="w-20 h-20 rounded-full hover:cursor-pointer hover:opacity-80 duration-300"
+              onClick={() => setOpenModalPhoto(true)}
             />
           </Avatar>
-          <div>
-            <h1 className="font-medium text-xl">{user?.fullname}</h1>
+          <div className="flex flex-col gap-2">
             <div>
-              <p className="text-sm text-slate-500 mb-2">
+              <h1 className="font-medium text-xl">{user?.fullname}</h1>
+              <p className="text-sm text-slate-500 mb-1">
                 {user?.profile?.bio !== "undefined"
                   ? user?.profile?.bio
                   : "Update your description"}
               </p>
-              <p className="flex items-center gap-1 text-sm text-slate-500 my-1">
+              <div className="flex items-center gap-1 text-sm text-slate-500">
                 <Phone className="w-4 h-4 text-primary" />
                 {user?.email}
-              </p>
-              <p className="flex items-center gap-1 text-sm text-slate-500 my-1">
+              </div>
+              <div className="flex items-center gap-1 text-sm text-slate-500">
                 <Mail className="w-4 h-4 text-primary" />
                 {user?.phoneNumber}
-              </p>
+              </div>
             </div>
             <div>
-              <h1 className="font-medium">My Skills</h1>
+              <h1 className="font-medium">Kemampuan</h1>
               <div className="flex items-center gap-2 flex-wrap">
                 {user?.profile?.skills?.length === 0 ? (
                   <span className="text-sm text-slate-500">
@@ -132,13 +136,21 @@ export default function Profile() {
           </Button>
         </div>
         <div className="max-w-4xl mx-auto bg-white rounded-xl mt-10">
-          <h1 className="text-xl font-medium mb-3">Applied Jobs</h1>
+          <h1 className="text-xl font-medium mb-3">
+            Lamaran Saya ({jobsApplied?.length})
+          </h1>
           <AppliedJobTable />
         </div>
       </div>
 
       {openModal && (
         <UpdateProfileModal openModal={openModal} setOpenModal={setOpenModal} />
+      )}
+      {openModalPhoto && (
+        <UpdatePhotoModal
+          openModal={openModalPhoto}
+          setOpenModal={setOpenModalPhoto}
+        />
       )}
     </div>
   );

@@ -1,14 +1,18 @@
 import FilterJobs from "@/components/fragments/jobsPage/FilterJobs";
 import Job from "@/components/fragments/jobsPage/Job";
 import { Button } from "@/components/ui/button";
+import { setSearchJob } from "@/redux/jobSlice";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Jobs() {
   const { allJobs } = useSelector((store) => store.job);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
   const [sortFilterJobs, setSortFilterJobs] = useState("");
+  const [input, setInput] = useState("");
+  const { searchJob } = useSelector((store) => store.job);
+  const dispatch = useDispatch();
 
   const sortJobs = (jobs, sortBy) => {
     if (sortBy === "highestSalary") {
@@ -23,6 +27,26 @@ export default function Jobs() {
 
     return jobs;
   };
+
+  useEffect(() => {
+    dispatch(setSearchJob(input));
+  }, [dispatch, input]);
+
+  useEffect(() => {
+    const searchJobs =
+      allJobs?.length > 0 &&
+      allJobs?.filter((job) => {
+        if (!searchJob) {
+          return true;
+        }
+
+        return (
+          job?.company?.name?.toLowerCase().includes(searchJob.toLowerCase()) ||
+          job?.title?.toLowerCase().includes(searchJob.toLowerCase())
+        );
+      });
+    setFilteredJobs(searchJobs);
+  }, [allJobs, searchJob]);
 
   useEffect(() => {
     let filtered = allJobs;
@@ -87,6 +111,7 @@ export default function Jobs() {
             handleCheckboxChange={handleCheckboxChange}
             handleResetFilter={handleResetFilter}
             setSortFilterJobs={setSortFilterJobs}
+            setInput={setInput}
           />
         </div>
         {filteredJobs.length === 0 ? (

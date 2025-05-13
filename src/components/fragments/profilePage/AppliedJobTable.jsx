@@ -17,9 +17,9 @@ export default function AppliedJobTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Date</TableHead>
-            <TableHead>Job Role</TableHead>
-            <TableHead>Company</TableHead>
+            <TableHead>Tanggal</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead>Perusahaan</TableHead>
             <TableHead className="text-right">Status</TableHead>
           </TableRow>
         </TableHeader>

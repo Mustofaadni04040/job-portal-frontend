@@ -46,7 +46,7 @@ export default function SimillarJobs({ data }) {
         <div className="flex items-center gap-2">
           <img src={peopleIcon} alt="people-icon" className="w-4 h-4" />
           <p className="flex items-center text-sm">
-            {data?.jobType} <Dot /> {data?.position} Positions
+            {data?.jobType} <Dot /> {data?.position} Posisi
           </p>
         </div>
 
@@ -59,10 +59,9 @@ export default function SimillarJobs({ data }) {
       </div>
 
       <div className="flex items-center gap-2 mt-3">
-        <Button variant="outline">
+        <Button className="bg-primary hover:bg-[#e7407d]">
           <a href={`/job-details/${data?._id}`}>Details</a>
         </Button>
-        <Button className="bg-primary hover:bg-[#e7407d]">Apply</Button>
       </div>
     </div>
   );

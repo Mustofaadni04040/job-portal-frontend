@@ -50,7 +50,7 @@ export default function Job({ data }) {
         <div className="flex items-center gap-2">
           <img src={peopleIcon} alt="people-icon" className="w-4 h-4" />
           <p className="flex items-center text-sm">
-            {data?.jobType} <Dot /> {data?.position} Positions
+            {data?.jobType} <Dot /> {data?.position} Posisi
           </p>
         </div>
 

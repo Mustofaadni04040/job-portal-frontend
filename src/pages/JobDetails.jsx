@@ -30,7 +30,7 @@ export default function JobDetails() {
         dispatch(setApplied(true));
         toast({
           title: "Success",
-          description: res.data.message,
+          description: res?.data?.message,
         });
       }
     } catch (error) {
@@ -38,7 +38,7 @@ export default function JobDetails() {
       toast({
         variant: "destructive",
         title: "Failed to appy job",
-        description: error.response.data.message,
+        description: error?.response?.data?.message,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }
@@ -72,17 +72,17 @@ export default function JobDetails() {
   useEffect(() => {
     const filterSimillarJobs = () => {
       const simillar = allJobs.filter((job) =>
-        job.requirements.some((requirement) =>
-          user.profile.skills.some(
+        job?.requirements?.some((requirement) =>
+          user?.profile?.skills?.some(
             (skill) =>
-              skill.trim().toLowerCase() === requirement.trim().toLowerCase()
+              skill?.trim().toLowerCase() === requirement?.trim().toLowerCase()
           )
         )
       );
       setSimillarJobs(simillar);
     };
     filterSimillarJobs();
-  }, [allJobs, user.profile.skills]);
+  }, [allJobs, user?.profile?.skills]);
 
   return (
     <div className="max-w-7xl mx-auto my-5">
@@ -94,21 +94,22 @@ export default function JobDetails() {
             handleApplyJob={handleApplyJob}
           />
         </div>
-        {simillarJobs.length === 0 ? (
-          <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
-            <h1 className="text-lg font-bold mb-3">Simillar jobs for you</h1>
-            <p className="text-center text-md font-normal">Jobs not found</p>
-          </div>
-        ) : (
-          <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
-            <h1 className="text-lg font-bold mb-3">Simillar jobs for you</h1>
-            <div className="flex flex-col gap-3">
-              {simillarJobs.map((data, index) => (
-                <SimillarJobs key={index} data={data} />
-              ))}
+        {user &&
+          (simillarJobs.length === 0 ? (
+            <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
+              <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
+              <p className="text-center text-md font-normal">Jobs not found</p>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
+              <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
+              <div className="flex flex-col gap-3">
+                {simillarJobs.map((data, index) => (
+                  <SimillarJobs key={index} data={data} />
+                ))}
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );

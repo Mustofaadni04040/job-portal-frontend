@@ -4,21 +4,21 @@ export const timeAgo = (dateString) => {
   const diffInSeconds = Math.floor((now - past) / 1000);
 
   const timeIntervals = {
-    year: 31536000,
-    month: 2592000,
-    week: 604800,
-    day: 86400,
-    hour: 3600,
-    minute: 60,
-    second: 1,
+    tahun: 31536000,
+    bulan: 2592000,
+    minggu: 604800,
+    hari: 86400,
+    jam: 3600,
+    menit: 60,
+    detik: 1,
   };
 
   for (const [unit, secondsInUnit] of Object.entries(timeIntervals)) {
     const interval = Math.floor(diffInSeconds / secondsInUnit);
     if (interval > 0) {
-      return `${interval} ${unit}${interval > 1 ? "s" : ""} ago`;
+      return `${interval} ${unit} lalu`;
     }
   }
 
-  return "just now";
+  return "baru saja";
 };

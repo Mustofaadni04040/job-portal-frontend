@@ -22,6 +22,7 @@ import Search from "@/components/elements/Search";
 
 const filterData = [
   {
+    filterTitle: "Lokasi",
     filterType: "Location",
     filterValue: [
       "Jakarta Pusat",
@@ -33,6 +34,7 @@ const filterData = [
     ],
   },
   {
+    filterTitle: "Gaji",
     filterType: "Salary",
     filterValue: [
       { min: 0, max: 1000000 },
@@ -43,10 +45,12 @@ const filterData = [
     ],
   },
   {
+    filterTitle: "Tipe Pekerjaan",
     filterType: "Job Type",
     filterValue: ["Full Time", "Part Time", "Internship", "Feelance"],
   },
   {
+    filterTitle: "Level",
     filterType: "Experience Level",
     filterValue: [0, 1, 2, 3, 4, 5],
   },
@@ -56,14 +60,15 @@ export default function FilterJobs({
   handleCheckboxChange,
   handleResetFilter,
   setSortFilterJobs,
+  setInput,
 }) {
   return (
     <div className="w-full border border-slate-400 shadow-md rounded-xl p-5">
       <div className="grid grid-cols-3 gap-1 mb-2">
-        <Search classname="col-span-2" />
+        <Search classname="col-span-2" setInput={setInput} />
         <Button className="col-span-1 flex items-center gap-2 bg-primary hover:bg-[#e7407d]">
           <BookMarked size={28} strokeWidth={3} />
-          Bookmark
+          Tersimpan
         </Button>
       </div>
       <div className="grid grid-cols-6 gap-3">
@@ -71,7 +76,8 @@ export default function FilterJobs({
           <Popover key={index}>
             <PopoverTrigger asChild>
               <Button variant="outline" className="border-slate-400">
-                {data.filterType} <SlidersHorizontal className="text-primary" />
+                {data.filterTitle}{" "}
+                <SlidersHorizontal className="text-primary" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-60 h-60 overflow-y-auto">
@@ -133,21 +139,21 @@ export default function FilterJobs({
         ))}
 
         <div className="col-span-2 ml-3 flex items-center gap-3">
-          <p className="text-sm font-semibold min-w-fit">Sort by</p>
+          <p className="text-sm font-semibold min-w-fit">Urut Berdasarkan</p>
           <Select onValueChange={(value) => setSortFilterJobs(value)}>
             <SelectTrigger className="border-slate-400">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder="Urutkan" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <div className="flex items-center justify-between">
-                  <SelectLabel>Sort by</SelectLabel>
+                  <SelectLabel>Urutkan</SelectLabel>
                 </div>
                 <SelectItem value="highestSalary" className="cursor-pointer">
-                  Highest Salary
+                  Gaji Tertinggi
                 </SelectItem>
                 <SelectItem value="latestPost" className="cursor-pointer">
-                  Latest Post
+                  Terbaru
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -162,4 +168,5 @@ FilterJobs.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
   handleResetFilter: PropTypes.func.isRequired,
   setSortFilterJobs: PropTypes.func.isRequired,
+  setInput: PropTypes.func.isRequired,
 };

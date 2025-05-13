@@ -93,7 +93,7 @@ export default function CompanySetup() {
   return (
     <div className="max-w-3xl mx-auto my-10">
       <form onSubmit={handleSubmit}>
-        <h1 className="font-bold text-2xl">Register New Company</h1>
+        <h1 className="font-bold text-2xl">Setup Company</h1>
 
         <div className="my-5">
           <div className="mb-3">
@@ -138,12 +138,7 @@ export default function CompanySetup() {
           </div>
           <div className="mb-3">
             <Label>Logo</Label>
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={handleChangeFile}
-              required
-            />
+            <Input type="file" accept="image/*" onChange={handleChangeFile} />
           </div>
         </div>
 

@@ -6,38 +6,26 @@ import SearchIcon from "../../assets/icons/search-icon.svg";
 // import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function Search({ classname }) {
-  // const [query, setQuery] = useState("");
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
-  // const handleSearchJobs = () => {
-  //   dispatch(setSearchQuery(query));
-  //   navigate("/browse");
-  // };
-
+export default function Search({ classname, setInput }) {
   return (
     <div className={classname}>
-      <div className="flex items-center gap-3 w-full border border-slate-400 px-3 py-2 rounded-md hover:border-primary duration-200">
-        <img src={SearchIcon} alt="search-icon" />
+      <div className="flex items-center gap-3 w-full border border-slate-400 py-2 pl-3 rounded-md hover:border-primary duration-200">
+        <label htmlFor="search">
+          <img src={SearchIcon} alt="search-icon" />
+        </label>
         <input
+          id="search"
           type="text"
-          placeholder="What position are you looking for?"
+          placeholder="Search by job title & company"
           className="w-full border-none outline-none text-slate-500"
-          // onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
       </div>
-      {/* <Button
-        type="submit"
-        className="bg-primary min-w-36 hover:bg-[#e7407d]"
-        onClick={handleSearchJobs}
-      >
-        Search
-      </Button> */}
     </div>
   );
 }
 
 Search.propTypes = {
   classname: PropTypes.string,
+  setInput: PropTypes.func.isRequired,
 };

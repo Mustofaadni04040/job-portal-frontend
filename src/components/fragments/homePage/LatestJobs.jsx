@@ -8,7 +8,7 @@ export default function LatestJobs() {
   return (
     <div className="w-full max-w-5xl mx-auto my-28">
       <h1 className="text-3xl font-medium">
-        <span className="text-primary">Latest & Top Jobs</span> Opening
+        <span className="text-primary">Lowongan</span> Terbaru
       </h1>
       {allJobs.length === 0 ? (
         <p className="text-center text-xl font-medium my-5">No Job Available</p>
@@ -22,7 +22,7 @@ export default function LatestJobs() {
       {allJobs.length > 6 && (
         <div className="w-full flex justify-center">
           <Button variant="outline">
-            <a href="/all-jobs">See All Jobs</a>
+            <a href="/all-jobs">Lihat Semua</a>
           </Button>
         </div>
       )}

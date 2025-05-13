@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { RadioGroup } from "../ui/radio-group";
+// import { RadioGroup } from "../ui/radio-group";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
@@ -17,7 +17,7 @@ export default function Register() {
     email: "",
     phoneNumber: "",
     password: "",
-    role: "",
+    // role: "",
     file: "",
   });
   const { toast } = useToast();
@@ -40,7 +40,7 @@ export default function Register() {
     formData.append("email", input.email);
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("password", input.password);
-    formData.append("role", input.role);
+    // formData.append("role", input.role);
 
     if (input.file) {
       formData.append("file", input.file);
@@ -143,7 +143,7 @@ export default function Register() {
         </div>
 
         <div className="flex items-center justify-between">
-          <RadioGroup className="flex items-center gap-5 my-3">
+          {/* <RadioGroup className="flex items-center gap-5 my-3">
             <div className="flex items-center space-x-2">
               <Label
                 htmlFor="job-seeker"
@@ -180,7 +180,7 @@ export default function Register() {
                 />
               </Label>
             </div>
-          </RadioGroup>
+          </RadioGroup> */}
           <div>
             <Label className="flex items-center gap-2">
               Profile
@@ -207,11 +207,11 @@ export default function Register() {
           )}
         </Button>
         <p className="text-sm text-center">
-          Already have an account?,{" "}
+          Sudah punya akun?,{" "}
           <span className="text-primary">
             <Link to={"/sign-in"}>Sign in</Link>
           </span>{" "}
-          here
+          disini
         </p>
       </form>
     </div>

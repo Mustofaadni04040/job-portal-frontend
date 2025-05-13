@@ -17,6 +17,7 @@ export default function JobDetailsDescription({
   handleApplyJob,
 }) {
   const isArchived = false;
+  console.log(detailJob);
 
   return (
     <div className="h-full border border-slate-200 rounded-xl">
@@ -40,7 +41,7 @@ export default function JobDetailsDescription({
             <div className="flex items-center gap-1">
               <img src={peopleIcon} alt="people-icon" className="w-4 h-4" />
               <p className="flex items-center text-sm text-slate-700">
-                {detailJob?.jobType} <Dot /> {detailJob?.position} Positions
+                {detailJob?.jobType} <Dot /> {detailJob?.position} Posisi
               </p>
             </div>
             <div className="flex items-center gap-1">
@@ -53,8 +54,8 @@ export default function JobDetailsDescription({
               <FileUser alt="applications-icon" className="w-4 h-4" />
               <p className="text-sm text-slate-700">
                 {detailJob?.applications?.length > 0
-                  ? `${detailJob?.applications?.length} applied this job`
-                  : "no one applied this job"}
+                  ? `${detailJob?.applications?.length} orang apply`
+                  : "Belum ada yang apply"}
               </p>
             </div>
 
@@ -66,7 +67,7 @@ export default function JobDetailsDescription({
                   applied ? "bg-primary" : "bg-primary hover:bg-[#e7407d]"
                 }`}
               >
-                {applied ? "Already Applied" : "Apply Now"}
+                {applied ? "Sudah Apply" : "Apply Sekarang"}
               </Button>
               <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
                 {isArchived ? (
@@ -94,14 +95,14 @@ export default function JobDetailsDescription({
       <hr className="w-full" />
       <div className="m-8">
         <div>
-          <h3 className="text-lg font-bold mb-2">Work Requirements</h3>
+          <h3 className="text-lg font-bold mb-2">Kebutuhan Pekerjaan</h3>
 
           <div className="flex flex-col gap-3 my-3">
-            <p>Experience : {detailJob?.experienceLevel} Years</p>
+            <p>Pengalaman : {detailJob?.experienceLevel} Tahun</p>
             <div className="flex items-center gap-2">
-              Skills Required :{" "}
+              Skill Dibutuhkan :{" "}
               {detailJob?.requirements === 0 ? (
-                "No Skills Required"
+                "Tidak Dibutuhkan Skill"
               ) : (
                 <div className="flex items-center gap-2 flex-wrap">
                   {detailJob?.requirements?.map((skill, index) => (
@@ -118,7 +119,7 @@ export default function JobDetailsDescription({
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-bold mb-2">Work Description</h3>
+          <h3 className="text-lg font-bold mb-2">Deskripsi Pekerjaan</h3>
           <p className="text-sm font-normal">{detailJob?.description}</p>
         </div>
       </div>

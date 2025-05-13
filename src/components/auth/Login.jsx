@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { RadioGroup } from "../ui/radio-group";
+// import { RadioGroup } from "../ui/radio-group";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +16,7 @@ export default function Login() {
   const [input, setInput] = useState({
     email: "",
     password: "",
-    role: "",
+    // role: "",
   });
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -105,7 +105,7 @@ export default function Login() {
           </Label>
         </div>
 
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <RadioGroup className="flex items-center gap-5 my-3">
             <div className="flex items-center space-x-2">
               <Label
@@ -144,7 +144,7 @@ export default function Login() {
               </Label>
             </div>
           </RadioGroup>
-        </div>
+        </div> */}
 
         <Button
           type="submit"
@@ -158,11 +158,11 @@ export default function Login() {
           )}
         </Button>
         <p className="text-sm text-center">
-          Don&apos;t have an account?,{" "}
+          Tidak punya akun?,{" "}
           <span className="text-primary">
             <Link to={"/sign-up"}>Sign up</Link>
           </span>{" "}
-          here
+          disini
         </p>
       </form>
     </div>

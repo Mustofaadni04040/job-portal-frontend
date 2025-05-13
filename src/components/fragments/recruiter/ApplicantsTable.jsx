@@ -96,7 +96,7 @@ export default function ApplicantsTable() {
                 <TableCell>{applicant?.createdAt?.split("T")[0]}</TableCell>
                 <TableCell>
                   <div
-                    className={`py-1 px-3 rounded-full text-white font-bold ${
+                    className={`py-1 px-3 flex items-center justify-center rounded-full text-white font-bold ${
                       applicant?.status === "accepted"
                         ? "bg-green-500"
                         : applicant?.status === "rejected"

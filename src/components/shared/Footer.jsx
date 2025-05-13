@@ -20,21 +20,16 @@ export default function Footer() {
               <br /> dream jobs.
             </p>
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <h2 className="text-lg font-medium mb-2">About Seeker</h2>
             <div className="text-slate-500">
-              <Link to="#" className="hover:text-primary">
-                About Us
+              <Link to="/" className="hover:text-primary">
+                Beranda
               </Link>
             </div>
             <div className="text-slate-500">
-              <Link to="#" className="hover:text-primary">
-                Blog
-              </Link>
-            </div>
-            <div className="text-slate-500">
-              <Link to="#" className="hover:text-primary">
-                Terms & Conditions
+              <Link to="/all-jobs" className="hover:text-primary">
+                Daftar Lowongan
               </Link>
             </div>
           </div>
