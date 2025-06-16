@@ -165,8 +165,8 @@ export default function FilterJobs({
 }
 
 FilterJobs.propTypes = {
-  handleCheckboxChange: PropTypes.func.isRequired,
-  handleResetFilter: PropTypes.func.isRequired,
-  setSortFilterJobs: PropTypes.func.isRequired,
-  setInput: PropTypes.func.isRequired,
+  handleCheckboxChange: PropTypes.func,
+  handleResetFilter: PropTypes.func,
+  setSortFilterJobs: PropTypes.func,
+  setInput: PropTypes.func,
 };

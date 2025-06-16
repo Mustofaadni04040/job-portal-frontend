@@ -1,11 +1,11 @@
 import Job from "@/components/fragments/jobsPage/Job";
-import { useGetAllJobs } from "@/hooks/useGetAllJobs";
+// import { useGetAllJobs } from "@/hooks/useGetAllJobs";
 import { setSearchQuery } from "@/redux/jobSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Browse() {
-  useGetAllJobs();
+  // useGetAllJobs();
   const { allJobs } = useSelector((store) => store.job);
   const dispatch = useDispatch();
 

@@ -1,13 +1,13 @@
 import CategoryCarousel from "@/components/fragments/homePage/CategoryCarousel";
 import HeroSection from "@/components/fragments/homePage/HeroSection";
 import LatestJobs from "@/components/fragments/homePage/LatestJobs";
-import { useGetAllJobs } from "@/hooks/useGetAllJobs";
+// import { useGetAllJobs } from "@/hooks/useGetAllJobs";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  useGetAllJobs();
+  // useGetAllJobs();
   const { user } = useSelector((store) => store.auth);
   const navigate = useNavigate();
 
