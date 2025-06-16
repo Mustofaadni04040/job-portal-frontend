@@ -1,22 +1,23 @@
-// import { Button } from "@/components/ui/button";
 import SearchIcon from "../../assets/icons/search-icon.svg";
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { setSearchQuery } from "@/redux/jobSlice";
-// import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function Search({ classname, setInput }) {
+export default function Search({
+  classname,
+  setInput,
+  placeholder,
+  classnameIcon,
+  id,
+}) {
   return (
     <div className={classname}>
       <div className="flex items-center gap-3 w-full border border-slate-400 py-2 pl-3 rounded-md hover:border-primary duration-200">
-        <label htmlFor="search">
-          <img src={SearchIcon} alt="search-icon" />
+        <label htmlFor={id}>
+          <img src={SearchIcon} alt="search-icon" className={classnameIcon} />
         </label>
         <input
-          id="search"
+          id={id}
           type="text"
-          placeholder="Search by job title & company"
+          placeholder={placeholder}
           className="w-full border-none outline-none text-slate-500"
           onChange={(e) => setInput(e.target.value)}
         />
@@ -28,4 +29,7 @@ export default function Search({ classname, setInput }) {
 Search.propTypes = {
   classname: PropTypes.string,
   setInput: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  classnameIcon: PropTypes.string,
+  id: PropTypes.string,
 };
