@@ -12,7 +12,6 @@ export default function Jobs() {
   const { allJobs } = useSelector((store) => store.job);
   const [sortFilterJobs, setSortFilterJobs] = useState("");
   const [input, setInput] = useState("");
-  const { searchQuery } = useSelector((store) => store.job);
   const [skeletonCount, setSkeletonCount] = useState(6);
   const [loading, setLoading] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState({
@@ -22,11 +21,10 @@ export default function Jobs() {
     "Experience Level": [],
   });
   const [limit, setLimit] = useState(6);
+  const [totalJobs, setTotalJobs] = useState(0);
   const [searchLocation, setSearchLocation] = useState("");
   const dispatch = useDispatch();
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
-
-  console.log(limit);
 
   useEffect(() => {
     const fetchAllJobs = async () => {
@@ -43,7 +41,9 @@ export default function Jobs() {
         const res = await debouncedGetData("/get-jobs", params);
 
         setSkeletonCount(res?.data?.jobs?.length);
+        setTotalJobs(res?.data?.total);
         dispatch(setAllJobs(res?.data?.jobs));
+        console.log(res?.data?.pages);
       } catch (error) {
         console.log(error);
       } finally {
@@ -106,11 +106,11 @@ export default function Jobs() {
         )}
         {loading ? (
           <div className="grid grid-cols-3 gap-5">
-            {Array.from({ length: skeletonCount < 6 ? 6 : skeletonCount }).map(
-              (_, index) => (
-                <JobSkeleton key={index} />
-              )
-            )}
+            {Array.from({
+              length: skeletonCount,
+            }).map((_, index) => (
+              <JobSkeleton key={index} />
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-5">
@@ -120,16 +120,18 @@ export default function Jobs() {
           </div>
         )}
 
-        <div className="w-full flex justify-center">
-          <Button
-            className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
-            onClick={() =>
-              limit === 6 ? setLimit(limit + 6) : setLimit(limit - 6)
-            }
-          >
-            {limit === 6 ? "Lebih Banyak" : "Lebih Sedikit"}
-          </Button>
-        </div>
+        {!loading && (
+          <div className="w-full flex justify-center">
+            <Button
+              className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
+              onClick={() =>
+                limit < totalJobs ? setLimit(limit + 6) : setLimit(limit - 6)
+              }
+            >
+              {limit < totalJobs ? "Lebih Banyak" : "Lebih Sedikit"}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
