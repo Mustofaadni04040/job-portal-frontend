@@ -21,9 +21,12 @@ export default function Jobs() {
     "Job Type": [],
     "Experience Level": [],
   });
+  const [limit, setLimit] = useState(6);
   const [searchLocation, setSearchLocation] = useState("");
   const dispatch = useDispatch();
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
+
+  console.log(limit);
 
   useEffect(() => {
     const fetchAllJobs = async () => {
@@ -34,6 +37,8 @@ export default function Jobs() {
           location: selectedFilter.Location?.join(",") || searchLocation || "",
           jobType: selectedFilter?.["Job Type"].join(",") || "",
           experienceLevel: selectedFilter?.["Experience Level"].join(",") || "",
+          sortBy: sortFilterJobs,
+          limit,
         };
         const res = await debouncedGetData("/get-jobs", params);
 
@@ -50,9 +55,11 @@ export default function Jobs() {
     debouncedGetData,
     dispatch,
     input,
+    limit,
     searchLocation,
     selectedFilter,
     selectedFilter.Location,
+    sortFilterJobs,
   ]);
 
   const handleResetFilter = () => {
@@ -112,6 +119,17 @@ export default function Jobs() {
             ))}
           </div>
         )}
+
+        <div className="w-full flex justify-center">
+          <Button
+            className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
+            onClick={() =>
+              limit === 6 ? setLimit(limit + 6) : setLimit(limit - 6)
+            }
+          >
+            {limit === 6 ? "Lebih Banyak" : "Lebih Sedikit"}
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -131,7 +131,10 @@ export default function FilterJobs({
 
         <div className="col-span-2 ml-3 flex items-center gap-3">
           <p className="text-sm font-semibold min-w-fit">Urut Berdasarkan</p>
-          <Select onValueChange={(value) => setSortFilterJobs(value)}>
+          <Select
+            onValueChange={(value) => setSortFilterJobs(value)}
+            defaultValue="latestPosted"
+          >
             <SelectTrigger className="border-slate-400">
               <SelectValue placeholder="Urutkan" />
             </SelectTrigger>
@@ -143,7 +146,7 @@ export default function FilterJobs({
                 <SelectItem value="highestSalary" className="cursor-pointer">
                   Gaji Tertinggi
                 </SelectItem>
-                <SelectItem value="latestPost" className="cursor-pointer">
+                <SelectItem value="latestPosted" className="cursor-pointer">
                   Terbaru
                 </SelectItem>
               </SelectGroup>
