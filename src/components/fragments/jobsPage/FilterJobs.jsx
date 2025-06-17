@@ -56,9 +56,8 @@ export default function FilterJobs({
               <div className="grid gap-4">
                 <div className="flex items-start justify-between gap-4 font-semibold">
                   <h4 className="font-medium leading-none">
-                    {data.filterType}
+                    {data.filterTitle}
                   </h4>
-
                   <PopoverClose
                     onClick={handleResetFilter}
                     className="text-xs text-primary font-semibold"
@@ -74,6 +73,7 @@ export default function FilterJobs({
                     setInput={(e) => {
                       setSearchLocation(e);
                     }}
+                    placeholder="Cari lokasi disini..."
                   />
                 )}
                 <div className="flex flex-col gap-2">
@@ -93,7 +93,15 @@ export default function FilterJobs({
                           value={displayedValue} // optional: karena sudah diatur di onChange
                           id={displayedValue}
                           type="checkbox"
+                          checked={selectedFilter[data.filterType]?.includes(
+                            displayedValue
+                          )}
                           onChange={(e) => {
+                            console.log(
+                              selectedFilter[data.filterType]?.includes(
+                                displayedValue
+                              )
+                            );
                             const currentFilter =
                               selectedFilter[data.filterType] || [];
                             const newFilter = e.target.checked

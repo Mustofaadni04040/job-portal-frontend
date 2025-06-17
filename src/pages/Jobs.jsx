@@ -26,6 +26,8 @@ export default function Jobs() {
   const dispatch = useDispatch();
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
 
+  console.log(selectedFilter);
+
   useEffect(() => {
     const fetchAllJobs = async () => {
       setLoading(true);
@@ -43,7 +45,6 @@ export default function Jobs() {
         setSkeletonCount(res?.data?.jobs?.length);
         setTotalJobs(res?.data?.total);
         dispatch(setAllJobs(res?.data?.jobs));
-        console.log(res?.data?.pages);
       } catch (error) {
         console.log(error);
       } finally {
@@ -120,7 +121,7 @@ export default function Jobs() {
           </div>
         )}
 
-        {!loading && (
+        {!loading && selectedFilter.Location.length === 0 && (
           <div className="w-full flex justify-center">
             <Button
               className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"

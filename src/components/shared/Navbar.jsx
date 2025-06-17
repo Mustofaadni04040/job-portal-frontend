@@ -146,7 +146,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`sticky left-0 top-0 w-full z-10 bg-white ${
+      className={`sticky left-0 top-0 w-full z-[999] bg-white ${
         isSticky ? "shadow-md" : ""
       }`}
     >
