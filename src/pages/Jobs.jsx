@@ -3,6 +3,7 @@ import FilterJobs from "@/components/fragments/jobsPage/FilterJobs";
 import Job from "@/components/fragments/jobsPage/Job";
 import { Button } from "@/components/ui/button";
 import { setAllJobs } from "@/redux/jobSlice";
+import { isFilterEmpty } from "@/utils/emptyFilter";
 import { getData } from "@/utils/fetch";
 import debounce from "debounce-promise";
 import { useState, useEffect, useMemo } from "react";
@@ -15,8 +16,8 @@ export default function Jobs() {
   const [skeletonCount, setSkeletonCount] = useState(6);
   const [loading, setLoading] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState({
-    Location: [],
     Salary: [],
+    Location: [],
     "Job Type": [],
     "Experience Level": [],
   });
@@ -26,19 +27,22 @@ export default function Jobs() {
   const dispatch = useDispatch();
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
 
-  console.log(selectedFilter);
-
   useEffect(() => {
     const fetchAllJobs = async () => {
       setLoading(true);
+      const salaryMin = selectedFilter.Salary.map((item) => item.min);
+      const salaryMax = selectedFilter.Salary.map((item) => item.max);
+
       try {
         const params = {
           keyword: input || "",
           location: selectedFilter.Location?.join(",") || searchLocation || "",
           jobType: selectedFilter?.["Job Type"].join(",") || "",
           experienceLevel: selectedFilter?.["Experience Level"].join(",") || "",
-          sortBy: sortFilterJobs,
+          sortBy: sortFilterJobs || "",
           limit,
+          salaryMin,
+          salaryMax,
         };
         const res = await debouncedGetData("/get-jobs", params);
 
@@ -121,7 +125,7 @@ export default function Jobs() {
           </div>
         )}
 
-        {!loading && selectedFilter.Location.length === 0 && (
+        {!loading && isFilterEmpty(selectedFilter) && (
           <div className="w-full flex justify-center">
             <Button
               className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"

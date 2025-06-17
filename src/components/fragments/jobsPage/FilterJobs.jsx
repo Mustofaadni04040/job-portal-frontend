@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import Search from "@/components/elements/Search";
 import { filterData } from "@/utils/filterData";
+import { isFilterEmpty } from "@/utils/emptyFilter";
 
 export default function FilterJobs({
   handleResetFilter,
@@ -52,18 +53,21 @@ export default function FilterJobs({
                 <SlidersHorizontal className="text-primary" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-fit h-60 overflow-y-auto">
+            <PopoverContent className="min-w-72 h-60 overflow-y-auto">
               <div className="grid gap-4">
                 <div className="flex items-start justify-between gap-4 font-semibold">
                   <h4 className="font-medium leading-none">
                     {data.filterTitle}
                   </h4>
-                  <PopoverClose
-                    onClick={handleResetFilter}
-                    className="text-xs text-primary font-semibold"
-                  >
-                    Reset
-                  </PopoverClose>
+
+                  {!isFilterEmpty(selectedFilter) && (
+                    <PopoverClose
+                      onClick={handleResetFilter}
+                      className="text-xs text-primary font-semibold"
+                    >
+                      Reset
+                    </PopoverClose>
+                  )}
                 </div>
                 {/* search for location */}
                 {data.filterType === "Location" && (
@@ -78,10 +82,7 @@ export default function FilterJobs({
                 )}
                 <div className="flex flex-col gap-2">
                   {data.filterValue.map((value, index) => {
-                    const displayedValue =
-                      data.filterType === "Salary"
-                        ? `${value.min}-${value.max}`
-                        : value;
+                    const displayedValue = value;
 
                     return (
                       <div
@@ -97,11 +98,6 @@ export default function FilterJobs({
                             displayedValue
                           )}
                           onChange={(e) => {
-                            console.log(
-                              selectedFilter[data.filterType]?.includes(
-                                displayedValue
-                              )
-                            );
                             const currentFilter =
                               selectedFilter[data.filterType] || [];
                             const newFilter = e.target.checked
