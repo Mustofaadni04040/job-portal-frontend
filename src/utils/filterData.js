@@ -25,7 +25,7 @@ export const filterData = [
   {
     filterTitle: "Tipe Pekerjaan",
     filterType: "Job Type",
-    filterValue: ["Full Time", "Part Time", "Internship", "Feelance"],
+    filterValue: ["Full Time", "Part Time", "Internship", "Freelance"],
   },
   {
     filterTitle: "Pengalaman",
