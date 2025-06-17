@@ -21,6 +21,7 @@ import {
 import Search from "@/components/elements/Search";
 import { filterData } from "@/utils/filterData";
 import { isFilterEmpty } from "@/utils/emptyFilter";
+import { Slider } from "@/components/ui/slider";
 
 export default function FilterJobs({
   handleResetFilter,
@@ -53,7 +54,11 @@ export default function FilterJobs({
                 <SlidersHorizontal className="text-primary" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="min-w-72 h-60 overflow-y-auto">
+            <PopoverContent
+              className={`${
+                data.filterType === "Salary" ? "h-auto" : "h-60"
+              } min-w-72 overflow-y-auto`}
+            >
               <div className="grid gap-4">
                 <div className="flex items-start justify-between gap-4 font-semibold">
                   <h4 className="font-medium leading-none">
@@ -82,46 +87,63 @@ export default function FilterJobs({
                 )}
                 <div className="flex flex-col gap-2">
                   {data.filterValue.map((value, index) => {
-                    const displayedValue = value;
-
                     return (
                       <div
                         key={index}
-                        className="flex items-center space-x-2 my-2"
+                        className={`${
+                          data.filterType === "Salary"
+                            ? "flex flex-col items-end space-y-4"
+                            : "flex items-center space-x-2 my-2"
+                        }`}
                       >
-                        {data.filterType === "Lokasi"}
-                        <input
-                          value={displayedValue} // optional: karena sudah diatur di onChange
-                          id={displayedValue}
-                          type="checkbox"
-                          checked={selectedFilter[data.filterType]?.includes(
-                            displayedValue
-                          )}
-                          onChange={(e) => {
-                            const currentFilter =
-                              selectedFilter[data.filterType] || [];
-                            const newFilter = e.target.checked
-                              ? [...currentFilter, displayedValue]
-                              : currentFilter.filter(
-                                  (item) => item !== displayedValue
-                                );
+                        {data.filterType === "Salary" ? (
+                          <Slider
+                            defaultValue={[value.max]}
+                            max={value.max}
+                            step={1000000}
+                            onValueChange={(e) => {
+                              setSelectedFilter({
+                                ...selectedFilter,
+                                [data.filterType]: [{ min: 0, max: e }],
+                              });
+                            }}
+                          />
+                        ) : (
+                          <input
+                            value={value} // optional: karena sudah diatur di onChange
+                            id={index}
+                            type="checkbox"
+                            checked={selectedFilter[data.filterType]?.includes(
+                              value
+                            )}
+                            onChange={(e) => {
+                              const currentFilter =
+                                selectedFilter[data.filterType] || [];
+                              const newFilter = e.target.checked
+                                ? [...currentFilter, value]
+                                : currentFilter.filter(
+                                    (item) => item !== value
+                                  );
 
-                            setSelectedFilter({
-                              ...selectedFilter,
-                              [data.filterType]: newFilter,
-                            });
-                          }}
-                        />
-                        <Label
-                          htmlFor={displayedValue}
-                          className="text-sm font-normal"
-                        >
+                              setSelectedFilter({
+                                ...selectedFilter,
+                                [data.filterType]: newFilter,
+                              });
+                            }}
+                          />
+                        )}
+
+                        <Label htmlFor={index} className="text-sm font-normal">
                           {data.filterType === "Salary"
-                            ? `${convertIDR(value.min)} - ${convertIDR(
-                                value.max
-                              )}`
+                            ? convertIDR(
+                                selectedFilter?.Salary?.length === 1
+                                  ? selectedFilter?.Salary?.map(
+                                      (item) => item.max
+                                    )
+                                  : value.max
+                              )
                             : data.filterType === "Experience Level"
-                            ? `${value} ${value > 1 ? "Years" : "Year"}`
+                            ? `${value} Tahun`
                             : value}
                         </Label>
                       </div>

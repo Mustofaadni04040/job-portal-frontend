@@ -14,13 +14,7 @@ export const filterData = [
   {
     filterTitle: "Gaji",
     filterType: "Salary",
-    filterValue: [
-      { min: 0, max: 1000000 },
-      { min: 1000000, max: 5000000 },
-      { min: 5000000, max: 10000000 },
-      { min: 10000000, max: 15000000 },
-      { min: 15000000, max: 20000000 },
-    ],
+    filterValue: [{ min: 0, max: 50000000 }],
   },
   {
     filterTitle: "Tipe Pekerjaan",

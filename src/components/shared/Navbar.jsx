@@ -128,8 +128,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
-  console.log(user);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);

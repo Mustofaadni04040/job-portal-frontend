@@ -80,7 +80,7 @@ export default function Jobs() {
   return (
     <div className="max-w-5xl mx-auto my-10">
       <div className="flex flex-col gap-5">
-        <div className="">
+        <div>
           <FilterJobs
             handleResetFilter={handleResetFilter}
             setSortFilterJobs={setSortFilterJobs}
