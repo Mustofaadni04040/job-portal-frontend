@@ -20,7 +20,6 @@ export default function RecruiterJobs() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, seetTotalPages] = useState(1);
   const { allRecruiterJobs } = useSelector((store) => store.job);
-  console.log(allRecruiterJobs);
 
   useEffect(() => {
     const fetchRecruiterJobs = async () => {
@@ -38,8 +37,9 @@ export default function RecruiterJobs() {
         );
 
         if (res.data.success) {
-          dispatch(setAllRecruiterJobs(res.data.jobs));
-          seetTotalPages(res.data.pages);
+          setSkeletonCount(res?.data?.jobs?.length);
+          dispatch(setAllRecruiterJobs(res?.data?.jobs));
+          seetTotalPages(res?.data?.pages);
         }
       } catch (error) {
         console.log(error);
@@ -70,7 +70,7 @@ export default function RecruiterJobs() {
           New Job
         </Button>
       </div>
-      <JobsTable loading={loading} />
+      <JobsTable loading={loading} skeletonCount={skeletonCount} />
 
       {allRecruiterJobs.length > 0 && (
         <PaginationComponent

@@ -18,8 +18,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import TableSkeleton from "../TableSkeleton";
 
-export default function JobsTable({ loading }) {
+export default function JobsTable({ loading, skeletonCount }) {
   const { allRecruiterJobs, searchJob } = useSelector((store) => store.job);
   const [filterJobs, setFilterJobs] = useState(allRecruiterJobs);
   const navigate = useNavigate();
@@ -60,6 +61,12 @@ export default function JobsTable({ loading }) {
                 <p>No jobs found</p>
               </TableCell>
             </TableRow>
+          ) : loading ? (
+            Array.from({ length: skeletonCount }).map((_, index) => (
+              <TableRow key={index}>
+                <TableSkeleton key={index} columnsCount={4} />
+              </TableRow>
+            ))
           ) : (
             filterJobs?.map((job, index) => (
               <TableRow key={`${job?._id}-${index}`}>
@@ -106,4 +113,5 @@ export default function JobsTable({ loading }) {
 
 JobsTable.propTypes = {
   loading: PropTypes.bool.isRequired,
+  skeletonCount: PropTypes.number.isRequired,
 };
