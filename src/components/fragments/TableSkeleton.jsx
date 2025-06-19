@@ -10,7 +10,11 @@ export default function TableSkeleton({ columnsCount }) {
           key={index}
           className={index + 1 === columnsCount ? "flex justify-end" : ""}
         >
-          <Skeleton className="h-4 w-[150px]" />
+          <Skeleton
+            className={`${
+              index + 1 === columnsCount ? "w-[50px]" : "w-[150px]"
+            } h-4`}
+          />
         </TableCell>
       ))}
     </>

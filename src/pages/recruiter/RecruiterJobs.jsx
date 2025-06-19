@@ -2,7 +2,7 @@ import PaginationComponent from "@/components/fragments/Pagination";
 import JobsTable from "@/components/fragments/recruiter/JobsTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { setAllRecruiterJobs, setSearchJob } from "@/redux/jobSlice";
+import { setAllRecruiterJobs } from "@/redux/jobSlice";
 import { getData } from "@/utils/fetch";
 import debounce from "debounce-promise";
 import { Plus } from "lucide-react";
@@ -28,6 +28,7 @@ export default function RecruiterJobs() {
         const params = {
           page: currentPage,
           limit: 5,
+          keyword: input || "",
         };
         const res = await debouncedGetData(
           "/get-admin-jobs",
@@ -48,18 +49,14 @@ export default function RecruiterJobs() {
       }
     };
     fetchRecruiterJobs();
-  }, [dispatch, debouncedGetData, currentPage]);
-
-  useEffect(() => {
-    dispatch(setSearchJob(input));
-  }, [dispatch, input]);
+  }, [dispatch, debouncedGetData, currentPage, input]);
 
   return (
     <div className="max-w-5xl mx-auto my-10">
       <div className="flex items-center justify-between">
         <Input
           className="max-w-60"
-          placeholder="Filter by company name or role"
+          placeholder="Filter by jobs role"
           onChange={(e) => setInput(e.target.value)}
         />
         <Button
@@ -72,7 +69,7 @@ export default function RecruiterJobs() {
       </div>
       <JobsTable loading={loading} skeletonCount={skeletonCount} />
 
-      {allRecruiterJobs.length > 0 && (
+      {allRecruiterJobs.length > 0 && !loading && input.length === 0 && (
         <PaginationComponent
           setCurrentPage={setCurrentPage}
           totalPages={totalPages}
