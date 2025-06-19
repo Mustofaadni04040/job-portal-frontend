@@ -98,7 +98,14 @@ export default function JobDetails() {
           (simillarJobs.length === 0 ? (
             <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
               <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
-              <p className="text-center text-md font-normal">Jobs not found</p>
+              <img
+                src="/not-found-logo.png"
+                alt="not-found-logo"
+                className="w-72 h-auto mx-auto"
+              />
+              <p className="text-center text-sm font-semibold">
+                Update skill anda untuk mendapatkan rekomendasi
+              </p>
             </div>
           ) : (
             <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">

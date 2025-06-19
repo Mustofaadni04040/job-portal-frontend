@@ -44,11 +44,13 @@ export default function Jobs() {
           salaryMin,
           salaryMax,
         };
-        const res = await debouncedGetData("/get-jobs", params);
+        const res = await debouncedGetData("/get-jobs", params, null, false);
 
-        setSkeletonCount(res?.data?.jobs?.length);
-        setTotalJobs(res?.data?.total);
-        dispatch(setAllJobs(res?.data?.jobs));
+        if (res.data.success) {
+          setSkeletonCount(res?.data?.jobs?.length);
+          setTotalJobs(res?.data?.total);
+          dispatch(setAllJobs(res?.data?.jobs));
+        }
       } catch (error) {
         console.log(error);
       } finally {

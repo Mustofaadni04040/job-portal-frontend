@@ -17,8 +17,9 @@ import { Ellipsis, Eye } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function JobsTable() {
+export default function JobsTable({ loading }) {
   const { allRecruiterJobs, searchJob } = useSelector((store) => store.job);
   const [filterJobs, setFilterJobs] = useState(allRecruiterJobs);
   const navigate = useNavigate();
@@ -102,3 +103,7 @@ export default function JobsTable() {
     </div>
   );
 }
+
+JobsTable.propTypes = {
+  loading: PropTypes.bool.isRequired,
+};

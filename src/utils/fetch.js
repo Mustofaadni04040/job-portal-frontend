@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export async function getData(url, params, token) {
+export async function getData(url, params, token, withCredentials) {
   return await axios.get(`${import.meta.env.VITE_JOB_API_END_POINT}${url}`, {
     params,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
+    withCredentials: withCredentials ? true : false,
   });
 }
 
