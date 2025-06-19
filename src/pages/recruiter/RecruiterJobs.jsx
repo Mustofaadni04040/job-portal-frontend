@@ -18,7 +18,7 @@ export default function RecruiterJobs() {
   const [skeletonCount, setSkeletonCount] = useState(5);
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, seetTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const { allRecruiterJobs } = useSelector((store) => store.job);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function RecruiterJobs() {
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);
           dispatch(setAllRecruiterJobs(res?.data?.jobs));
-          seetTotalPages(res?.data?.pages);
+          setTotalPages(res?.data?.pages);
         }
       } catch (error) {
         console.log(error);

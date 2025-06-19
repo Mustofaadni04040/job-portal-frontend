@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Table,
@@ -123,25 +122,22 @@ export default function ApplicantsTable({ loading, skeletonCount }) {
                       </PopoverTrigger>
                       <PopoverContent className="w-fit flex flex-col p-0">
                         {actionStatus.map((status, index) => (
-                          <Button
-                            key={index}
-                            variant="ghost"
-                            className={`${
+                          <PopoverClose
+                            className={`flex items-center gap-2 py-2 px-4 ${
                               status === "accepted"
-                                ? "rounded-bl-none rounded-br-none hover:bg-green-300"
-                                : "rounded-tl-none rounded-tr-none hover:bg-red-300"
+                                ? "hover:rounded-tl-sm hover:rounded-tr-sm hover:bg-green-300"
+                                : "hover:rounded-bl-sm hover:rounded-br-sm hover:bg-red-300"
                             }`}
+                            key={index}
                             onClick={() => handleStatus(status, applicant._id)}
                           >
-                            <PopoverClose className="flex items-center gap-2">
-                              {status === "accepted" ? (
-                                <Check className="font-bold" />
-                              ) : (
-                                <X className="font-bold" />
-                              )}
-                              <span>{status}</span>
-                            </PopoverClose>
-                          </Button>
+                            {status === "accepted" ? (
+                              <Check className="font-bold" />
+                            ) : (
+                              <X className="font-bold" />
+                            )}
+                            <span>{status}</span>
+                          </PopoverClose>
                         ))}
                       </PopoverContent>
                     </Popover>
