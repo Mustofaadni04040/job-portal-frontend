@@ -37,8 +37,6 @@ export default function RecruiterJobs() {
           true
         );
 
-        console.log(res);
-
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);
           dispatch(setAllRecruiterJobs(res?.data?.jobs));
