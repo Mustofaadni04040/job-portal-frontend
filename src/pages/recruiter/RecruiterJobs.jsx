@@ -31,11 +31,13 @@ export default function RecruiterJobs() {
           keyword: input || "",
         };
         const res = await debouncedGetData(
-          "/get-admin-jobs",
+          `${import.meta.env.VITE_JOB_API_END_POINT}/get-admin-jobs`,
           params,
           null,
           true
         );
+
+        console.log(res);
 
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);

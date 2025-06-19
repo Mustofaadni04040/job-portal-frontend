@@ -44,7 +44,12 @@ export default function Jobs() {
           salaryMin,
           salaryMax,
         };
-        const res = await debouncedGetData("/get-jobs", params, null, false);
+        const res = await debouncedGetData(
+          `${import.meta.env.VITE_JOB_API_END_POINT}/get-jobs`,
+          params,
+          null,
+          false
+        );
 
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);

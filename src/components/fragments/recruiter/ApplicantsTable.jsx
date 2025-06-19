@@ -15,10 +15,12 @@ import { ToastAction } from "@radix-ui/react-toast";
 import axios from "axios";
 import { Check, Ellipsis, X } from "lucide-react";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import TableSkeleton from "../TableSkeleton";
 
 const actionStatus = ["accepted", "rejected"];
 
-export default function ApplicantsTable() {
+export default function ApplicantsTable({ loading, skeletonCount }) {
   const { applicants } = useSelector((store) => store.application);
   const { toast } = useToast();
 
@@ -68,14 +70,20 @@ export default function ApplicantsTable() {
         </TableHeader>
 
         <TableBody>
-          {applicants?.applications?.length === 0 ? (
+          {applicants?.length === 0 ? (
             <TableRow>
               <TableCell colSpan={7} className="h-24 text-center">
                 <p>No applicants</p>
               </TableCell>
             </TableRow>
+          ) : loading ? (
+            Array.from({ length: skeletonCount }).map((_, index) => (
+              <TableRow key={index}>
+                <TableSkeleton columnsCount={7} />
+              </TableRow>
+            ))
           ) : (
-            applicants?.applications?.map((applicant, index) => (
+            applicants?.map((applicant, index) => (
               <TableRow key={`${applicant._id}-${index}`}>
                 <TableCell>{applicant?.applicant?.fullname}</TableCell>
                 <TableCell>{applicant?.applicant?.email}</TableCell>
@@ -147,3 +155,8 @@ export default function ApplicantsTable() {
     </div>
   );
 }
+
+ApplicantsTable.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  skeletonCount: PropTypes.number.isRequired,
+};
