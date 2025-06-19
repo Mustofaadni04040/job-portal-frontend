@@ -14,32 +14,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Ellipsis, Eye } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import TableSkeleton from "../TableSkeleton";
 
 export default function JobsTable({ loading, skeletonCount }) {
-  const { allRecruiterJobs, searchJob } = useSelector((store) => store.job);
-  const [filterJobs, setFilterJobs] = useState(allRecruiterJobs);
+  const { allRecruiterJobs } = useSelector((store) => store.job);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const filteredJobs =
-      allRecruiterJobs?.length > 0 &&
-      allRecruiterJobs?.filter((job) => {
-        if (!searchJob) {
-          return true;
-        }
-
-        return (
-          job?.company?.name?.toLowerCase().includes(searchJob.toLowerCase()) ||
-          job?.title?.toLowerCase().includes(searchJob.toLowerCase())
-        );
-      });
-    setFilterJobs(filteredJobs);
-  }, [allRecruiterJobs, searchJob]);
 
   return (
     <div className="my-10">
@@ -55,7 +37,7 @@ export default function JobsTable({ loading, skeletonCount }) {
         </TableHeader>
 
         <TableBody>
-          {filterJobs?.length === 0 ? (
+          {allRecruiterJobs?.length === 0 ? (
             <TableRow>
               <TableCell colSpan={4} className="h-24 text-center">
                 <p>No jobs found</p>
@@ -68,7 +50,7 @@ export default function JobsTable({ loading, skeletonCount }) {
               </TableRow>
             ))
           ) : (
-            filterJobs?.map((job, index) => (
+            allRecruiterJobs?.map((job, index) => (
               <TableRow key={`${job?._id}-${index}`}>
                 <TableCell>{job?.company?.name}</TableCell>
                 <TableCell>{job?.title}</TableCell>
