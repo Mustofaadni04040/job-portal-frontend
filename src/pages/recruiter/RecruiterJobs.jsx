@@ -71,7 +71,7 @@ export default function RecruiterJobs() {
       </div>
       <JobsTable loading={loading} skeletonCount={skeletonCount} />
 
-      {allRecruiterJobs.length > 0 && !loading && input.length === 0 && (
+      {allRecruiterJobs.length > 0 && input.length === 0 && (
         <PaginationComponent
           setCurrentPage={setCurrentPage}
           totalPages={totalPages}

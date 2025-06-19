@@ -22,8 +22,8 @@ export default function Applicants() {
       setLoading(true);
       try {
         const params = {
-          page: 1,
-          limit: 5,
+          page: currentPage,
+          limit: 10,
         };
         const res = await debouncedGetData(
           `${import.meta.env.VITE_APPLICATION_API_END_POINT}/${
@@ -46,13 +46,13 @@ export default function Applicants() {
       }
     };
     fetchAllApplicants();
-  }, [debouncedGetData, dispatch, paramsId.id]);
+  }, [debouncedGetData, dispatch, paramsId.id, currentPage]);
 
   return (
     <div className="max-w-5xl mx-auto my-10">
       <ApplicantsTable loading={loading} skeletonCount={skeletonCount} />
 
-      {applicants?.length > 0 && !loading && (
+      {applicants?.length > 0 && (
         <PaginationComponent
           setCurrentPage={setCurrentPage}
           totalPages={totalPages}
