@@ -36,6 +36,8 @@ export default function Jobs() {
     if (searchLocation.length > 0) params.set("location", searchLocation);
     if (selectedFilter["Job Type"].length > 0)
       params.set("jobType", selectedFilter["Job Type"]);
+    if (selectedFilter["Experience Level"].length > 0)
+      params.set("experience", selectedFilter["Experience Level"].join(","));
 
     navigate(`/all-jobs?${params.toString()}`);
   }, [input, navigate, searchLocation, selectedFilter]);
