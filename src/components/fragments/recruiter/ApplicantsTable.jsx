@@ -1,4 +1,8 @@
-import { PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Table,
   TableBody,
@@ -9,7 +13,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { Popover, PopoverClose } from "@radix-ui/react-popover";
 import { ToastAction } from "@radix-ui/react-toast";
 import axios from "axios";
 import { Check, Ellipsis, LoaderCircle, X } from "lucide-react";
@@ -18,6 +21,7 @@ import PropTypes from "prop-types";
 import TableSkeleton from "../TableSkeleton";
 import { useState } from "react";
 import { setApplicantStatus } from "@/redux/applicationSlice";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 const actionStatus = ["accepted", "rejected"];
 
@@ -62,8 +66,9 @@ export default function ApplicantsTable({ loading, skeletonCount }) {
 
   if (loadingStatus) {
     return (
-      <div className="flex w-full justify-center my-10">
+      <div className="flex flex-col gap-2 w-full min-h-96 items-center justify-center my-10">
         <LoaderCircle className="animate-spin text-primary w-16 h-16" />
+        <p className="text-lg font-semibold">Updating status...</p>
       </div>
     );
   }
