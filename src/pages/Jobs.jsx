@@ -32,8 +32,8 @@ export default function Jobs() {
   const updateSearchParams = useCallback(() => {
     const params = new URLSearchParams();
 
-    if (input.length > 0) params.set("keyword", input);
-    if (searchLocation.length > 0) params.set("location", searchLocation);
+    if (input) params.set("keyword", input);
+    if (searchLocation) params.set("location", searchLocation);
     if (selectedFilter["Job Type"].length > 0)
       params.set("jobType", selectedFilter["Job Type"]);
     if (selectedFilter["Experience Level"].length > 0)
@@ -43,9 +43,10 @@ export default function Jobs() {
         "salary",
         selectedFilter.Salary.map((item) => `${item.min}-${item.max}`)
       );
+    if (sortFilterJobs) params.set("sortBy", sortFilterJobs);
 
     navigate(`/all-jobs?${params.toString()}`);
-  }, [input, navigate, searchLocation, selectedFilter]);
+  }, [input, navigate, searchLocation, selectedFilter, sortFilterJobs]);
 
   useEffect(() => {
     updateSearchParams();
