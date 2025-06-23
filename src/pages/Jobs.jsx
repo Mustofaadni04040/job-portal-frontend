@@ -33,9 +33,10 @@ export default function Jobs() {
     const params = new URLSearchParams();
 
     if (input) params.set("keyword", input);
+    if (searchLocation) params.set("location", searchLocation);
 
     navigate(`/all-jobs?${params.toString()}`);
-  }, [input, navigate]);
+  }, [input, navigate, searchLocation]);
 
   useEffect(() => {
     updateSearchParams();
