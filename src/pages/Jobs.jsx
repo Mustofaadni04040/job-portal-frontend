@@ -38,6 +38,11 @@ export default function Jobs() {
       params.set("jobType", selectedFilter["Job Type"]);
     if (selectedFilter["Experience Level"].length > 0)
       params.set("experience", selectedFilter["Experience Level"].join(","));
+    if (selectedFilter.Salary.length > 0)
+      params.set(
+        "salary",
+        selectedFilter.Salary.map((item) => `${item.min}-${item.max}`)
+      );
 
     navigate(`/all-jobs?${params.toString()}`);
   }, [input, navigate, searchLocation, selectedFilter]);
