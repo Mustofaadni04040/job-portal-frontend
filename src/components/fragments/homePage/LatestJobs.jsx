@@ -19,7 +19,7 @@ export default function LatestJobs() {
           ))}
         </div>
       )}
-      {allJobs.length > 6 && (
+      {allJobs.length && (
         <div className="w-full flex justify-center">
           <Button variant="outline">
             <a href="/all-jobs">Lihat Semua</a>

@@ -101,8 +101,10 @@ export default function JobDetailsDescription({
             <p>Pengalaman : {detailJob?.experienceLevel} Tahun</p>
             <div className="flex items-center gap-2">
               Skill Dibutuhkan :{" "}
-              {detailJob?.requirements === 0 ? (
-                "Tidak Dibutuhkan Skill"
+              {detailJob?.requirements[0] === "No requirements needed" ? (
+                <span className="border border-primary border-opacity-50 px-5 rounded-full">
+                  Tidak Dibutuhkan Skill
+                </span>
               ) : (
                 <div className="flex items-center gap-2 flex-wrap">
                   {detailJob?.requirements?.map((skill, index) => (
