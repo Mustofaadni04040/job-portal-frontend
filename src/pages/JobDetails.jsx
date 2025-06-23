@@ -12,14 +12,17 @@ export default function JobDetails() {
   const params = useParams();
   const _id = params.id;
   const { user } = useSelector((store) => store.auth);
-  const { allJobs } = useSelector((store) => store.job);
-  const { detailJob } = useSelector((store) => store.job);
+  const { detailJob, applied, allJobs } = useSelector((store) => store.job);
   const dispatch = useDispatch();
-  const { applied } = useSelector((store) => store.job);
   const { toast } = useToast();
   const [simillarJobs, setSimillarJobs] = useState([]);
+  const [loadingApply, setLoadingApply] = useState(false);
+  const [totalApplicants, setTotalApplicants] = useState(0);
+
+  console.log(detailJob);
 
   const handleApplyJob = async () => {
+    setLoadingApply(true);
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_APPLICATION_API_END_POINT}/apply/${_id}`,
@@ -28,6 +31,7 @@ export default function JobDetails() {
 
       if (res.data.success) {
         dispatch(setApplied(true));
+        setTotalApplicants(totalApplicants + 1);
         toast({
           title: "Success",
           description: res?.data?.message,
@@ -41,6 +45,8 @@ export default function JobDetails() {
         description: error?.response?.data?.message,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
+    } finally {
+      setLoadingApply(false);
     }
   };
 
@@ -54,6 +60,7 @@ export default function JobDetails() {
 
         if (res.data.success) {
           dispatch(setDetailJob(res.data.job));
+          setTotalApplicants(res.data.job.applications.length);
           dispatch(
             setApplied(
               res.data.job.applications.some(
@@ -92,6 +99,8 @@ export default function JobDetails() {
             detailJob={detailJob}
             applied={applied}
             handleApplyJob={handleApplyJob}
+            loadingApply={loadingApply}
+            totalApplicants={totalApplicants}
           />
         </div>
         {user &&

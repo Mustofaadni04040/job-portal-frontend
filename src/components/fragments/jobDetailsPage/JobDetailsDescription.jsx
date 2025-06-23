@@ -15,12 +15,12 @@ export default function JobDetailsDescription({
   detailJob,
   applied,
   handleApplyJob,
+  totalApplicants,
 }) {
   const isArchived = false;
-  console.log(detailJob);
 
   return (
-    <div className="h-full border border-slate-200 rounded-xl">
+    <div className="min-h-[1000px] border border-slate-200 rounded-xl">
       <div className="flex justify-between m-8">
         <div className="flex gap-3">
           <Avatar className="border border-slate-200 p-2 rounded-full w-20 h-20">
@@ -53,9 +53,9 @@ export default function JobDetailsDescription({
             <div className="flex items-center gap-1">
               <FileUser alt="applications-icon" className="w-4 h-4" />
               <p className="text-sm text-slate-700">
-                {detailJob?.applications?.length > 0
-                  ? `${detailJob?.applications?.length} orang apply`
-                  : "Belum ada yang apply"}
+                {totalApplicants > 0
+                  ? `${totalApplicants} pelamar`
+                  : "Belum ada pelamar"}
               </p>
             </div>
 
@@ -67,7 +67,7 @@ export default function JobDetailsDescription({
                   applied ? "bg-primary" : "bg-primary hover:bg-[#e7407d]"
                 }`}
               >
-                {applied ? "Sudah Apply" : "Apply Sekarang"}
+                {applied ? "Sudah Lamar" : "Lamar Sekarang"}
               </Button>
               <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
                 {isArchived ? (
@@ -148,4 +148,5 @@ JobDetailsDescription.propTypes = {
   }),
   applied: PropTypes.bool.isRequired,
   handleApplyJob: PropTypes.func.isRequired,
+  totalApplicants: PropTypes.number.isRequired,
 };
