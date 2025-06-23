@@ -34,10 +34,12 @@ export default function Jobs() {
 
     if (input) params.set("keyword", input);
     if (searchLocation) params.set("location", searchLocation);
+    if (selectedFilter.Location.length > 0)
+      params.set("location", selectedFilter.Location);
     if (selectedFilter["Job Type"].length > 0)
       params.set("jobType", selectedFilter["Job Type"]);
     if (selectedFilter["Experience Level"].length > 0)
-      params.set("experience", selectedFilter["Experience Level"].join(","));
+      params.set("experience", selectedFilter["Experience Level"]);
     if (selectedFilter.Salary.length > 0)
       params.set(
         "salary",
