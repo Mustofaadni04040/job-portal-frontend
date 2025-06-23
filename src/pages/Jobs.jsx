@@ -6,8 +6,9 @@ import { setAllJobs } from "@/redux/jobSlice";
 import { isFilterEmpty } from "@/utils/emptyFilter";
 import { getData } from "@/utils/fetch";
 import debounce from "debounce-promise";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Jobs() {
   const { allJobs } = useSelector((store) => store.job);
@@ -26,8 +27,18 @@ export default function Jobs() {
   const [searchLocation, setSearchLocation] = useState("");
   const dispatch = useDispatch();
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
+  const navigate = useNavigate();
+
+  const updateSearchParams = useCallback(() => {
+    const params = new URLSearchParams();
+
+    if (input) params.set("keyword", input);
+
+    navigate(`/all-jobs?${params.toString()}`);
+  }, [input, navigate]);
 
   useEffect(() => {
+    updateSearchParams();
     const fetchAllJobs = async () => {
       setLoading(true);
       const salaryMin = selectedFilter.Salary.map((item) => item.min);
@@ -72,6 +83,7 @@ export default function Jobs() {
     selectedFilter,
     selectedFilter.Location,
     sortFilterJobs,
+    updateSearchParams,
   ]);
 
   const handleResetFilter = () => {
