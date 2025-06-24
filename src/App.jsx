@@ -99,6 +99,14 @@ function App() {
               </ProtectedUserRoute>
             }
           />
+          <Route
+            path="/jobs/saved"
+            element={
+              <ProtectedUserRoute>
+                <JobDetails />
+              </ProtectedUserRoute>
+            }
+          />
           {/* recruiter */}
           <Route
             path="/recruiter/companies"

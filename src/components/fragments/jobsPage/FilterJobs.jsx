@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { BookMarked, SlidersHorizontal } from "lucide-react";
+import { FolderOpenDot, SlidersHorizontal } from "lucide-react";
 import { PopoverClose } from "@radix-ui/react-popover";
 import {
   Select,
@@ -41,7 +41,7 @@ export default function FilterJobs({
           id="search-job"
         />
         <Button className="col-span-1 flex items-center gap-2 bg-primary hover:bg-[#e7407d]">
-          <BookMarked size={28} strokeWidth={3} />
+          <FolderOpenDot size={28} strokeWidth={3} />
           Tersimpan
         </Button>
       </div>
