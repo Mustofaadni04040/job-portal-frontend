@@ -22,6 +22,7 @@ import Search from "@/components/elements/Search";
 import { filterData } from "@/utils/filterData";
 import { isFilterEmpty } from "@/utils/emptyFilter";
 import { Slider } from "@/components/ui/slider";
+import { useNavigate } from "react-router-dom";
 
 export default function FilterJobs({
   handleResetFilter,
@@ -31,6 +32,7 @@ export default function FilterJobs({
   setSelectedFilter,
   setSearchLocation,
 }) {
+  const navigate = useNavigate();
   return (
     <div className="w-full border border-slate-400 shadow-md rounded-xl p-5">
       <div className="grid grid-cols-3 gap-1 mb-2">
@@ -40,7 +42,10 @@ export default function FilterJobs({
           placeholder="Cari pekejeraan impianmu disini..."
           id="search-job"
         />
-        <Button className="col-span-1 flex items-center gap-2 bg-primary hover:bg-[#e7407d]">
+        <Button
+          className="col-span-1 flex items-center gap-2 bg-primary hover:bg-[#e7407d]"
+          onClick={() => navigate("/jobs/saved")}
+        >
           <FolderOpenDot size={28} strokeWidth={3} />
           Tersimpan
         </Button>

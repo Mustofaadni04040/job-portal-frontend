@@ -5,7 +5,7 @@ import {
 } from "@radix-ui/react-popover";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "../ui/button";
-import { Bookmark, LogOut, User2 } from "lucide-react";
+import { LogOut, User2 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -93,12 +93,6 @@ const HandleOpenPopover = ({ open, setOpen }) => {
                 <User2 />
                 <Button variant="link" onClick={() => setOpen(!open)}>
                   <Link to={"/profile"}>View Profile</Link>
-                </Button>
-              </div>
-              <div className="flex w-fit items-center gap-2 cursor-pointer">
-                <Bookmark />
-                <Button variant="link" onClick={() => setOpen(!open)}>
-                  <Link to={""}>Bookmark</Link>
                 </Button>
               </div>
             </>

@@ -23,6 +23,7 @@ import Applicants from "./pages/recruiter/Applicants";
 import ProtectedProfileUser from "./components/fragments/ProtectedProfileUser";
 import ProtectedUserRoute from "./components/fragments/ProtectedUserRoute";
 import ProtectedRecruiterRoute from "./components/fragments/ProtectedRecruiterRoute";
+import SavedJobs from "./pages/SavedJobs";
 
 function App() {
   const dispatch = useDispatch();
@@ -103,7 +104,7 @@ function App() {
             path="/jobs/saved"
             element={
               <ProtectedUserRoute>
-                <JobDetails />
+                <SavedJobs />
               </ProtectedUserRoute>
             }
           />

@@ -1,17 +1,15 @@
 import verifiedIcon from "../../../assets/icons/verified-logo.svg";
-import unarchivedIcon from "../../../assets/icons/unarchive-icon.svg";
-import archivedIcon from "../../../assets/icons/archive-icon.svg";
 import locationIcon from "../../../assets/icons/location-icon.svg";
 import peopleIcon from "../../../assets/icons/people-icon.svg";
 import moneyIcon from "../../../assets/icons/money-icon.svg";
-import { Dot } from "lucide-react";
+import { Bookmark, Dot } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 
 export default function LatestJobCards({ data }) {
-  const isArchived = true;
+  const isArchived = false;
 
   return (
     <div className="flex flex-col justify-between my-3 p-4 rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
@@ -29,17 +27,15 @@ export default function LatestJobCards({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        <button>
-          {isArchived ? (
-            <img src={archivedIcon} alt="archived-icon" className="w-5 h-5" />
-          ) : (
-            <img
-              src={unarchivedIcon}
-              alt="unarchived-icon"
-              className="w-5 h-5"
-            />
-          )}
-        </button>
+        {isArchived ? (
+          <button>
+            <Bookmark size={22} className="text-primary" fill="#ff498b" />
+          </button>
+        ) : (
+          <button>
+            <Bookmark size={22} className="text-primary" />
+          </button>
+        )}
       </div>
 
       <div className="mt-1">
