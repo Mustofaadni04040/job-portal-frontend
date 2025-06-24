@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/fragments/Breadcrumb";
 import JobDetailsDescription from "@/components/fragments/jobDetailsPage/JobDetailsDescription";
 import SimillarJobs from "@/components/fragments/jobDetailsPage/SimillarJobs";
 import { ToastAction } from "@/components/ui/toast";
@@ -92,7 +93,13 @@ export default function JobDetails() {
   }, [allJobs, user?.profile?.skills]);
 
   return (
-    <div className="max-w-7xl mx-auto my-5">
+    <div className="max-w-7xl mx-auto">
+      <div className="my-10">
+        <Breadcrumbs
+          textSecond="Detail Lowongan"
+          textThird={detailJob?.title}
+        />
+      </div>
       <div className="grid grid-cols-3 gap-5">
         <div className="col-span-2">
           <JobDetailsDescription
