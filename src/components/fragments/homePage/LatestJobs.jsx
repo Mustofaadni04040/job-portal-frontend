@@ -11,7 +11,9 @@ export default function LatestJobs() {
         <span className="text-primary">Lowongan</span> Terbaru
       </h1>
       {allJobs.length === 0 ? (
-        <p className="text-center text-xl font-medium my-5">No Job Available</p>
+        <p className="text-center text-xl font-medium my-5">
+          Tidak ada lowongan terbaru
+        </p>
       ) : (
         <div className="grid grid-cols-3 gap-5 my-5">
           {allJobs.slice(0, 6).map((data, index) => (
