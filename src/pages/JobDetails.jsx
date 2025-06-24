@@ -20,8 +20,6 @@ export default function JobDetails() {
   const [loadingApply, setLoadingApply] = useState(false);
   const [totalApplicants, setTotalApplicants] = useState(0);
 
-  console.log(detailJob);
-
   const handleApplyJob = async () => {
     setLoadingApply(true);
     try {
@@ -93,7 +91,7 @@ export default function JobDetails() {
   }, [allJobs, user?.profile?.skills]);
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto mb-10">
       <div className="my-10">
         <Breadcrumbs
           textSecond="Detail Lowongan"
