@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/fragments/Breadcrumb";
 import JobSkeleton from "@/components/fragments/JobSkeleton";
 import FilterJobs from "@/components/fragments/jobsPage/FilterJobs";
 import Job from "@/components/fragments/jobsPage/Job";
@@ -110,66 +111,71 @@ export default function Jobs() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto my-10">
-      <div className="flex flex-col gap-5">
-        <div>
-          <FilterJobs
-            handleResetFilter={handleResetFilter}
-            setSortFilterJobs={setSortFilterJobs}
-            setSelectedFilter={setSelectedFilter}
-            selectedFilter={selectedFilter}
-            setSearchLocation={setSearchLocation}
-            setInput={setInput}
-          />
-        </div>
-        {allJobs.length === 0 && (
-          <div className="flex flex-col items-center">
-            <img
-              src="/not-found-logo.png"
-              alt="not-found-logo"
-              className="w-96 h-96"
-            />
-            <p className="text-center text-xl">
-              Maaf, pekerjaan yang kamu cari belum ada nih 🙏😊
-            </p>
-            <Button
-              variant="secondary"
-              className="mt-5 bg-primary bg-opacity-10 hover:bg-opacity-10 hover:bg-primary text-primary"
-              onClick={handleResetFilter}
-            >
-              Show all jobs
-            </Button>
-          </div>
-        )}
-        {loading ? (
-          <div className="grid grid-cols-3 gap-5">
-            {Array.from({
-              length: skeletonCount,
-            }).map((_, index) => (
-              <JobSkeleton key={index} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-3 gap-5">
-            {allJobs.map((data, index) => (
-              <Job key={index} data={data} />
-            ))}
-          </div>
-        )}
-
-        {!loading && isFilterEmpty(selectedFilter) && (
-          <div className="w-full flex justify-center">
-            <Button
-              className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
-              onClick={() =>
-                limit < totalJobs ? setLimit(limit + 6) : setLimit(limit - 6)
-              }
-            >
-              {limit < totalJobs ? "Lebih Banyak" : "Lebih Sedikit"}
-            </Button>
-          </div>
-        )}
+    <>
+      <div className="max-w-7xl mx-auto my-10">
+        <Breadcrumbs />
       </div>
-    </div>
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col gap-5">
+          <div>
+            <FilterJobs
+              handleResetFilter={handleResetFilter}
+              setSortFilterJobs={setSortFilterJobs}
+              setSelectedFilter={setSelectedFilter}
+              selectedFilter={selectedFilter}
+              setSearchLocation={setSearchLocation}
+              setInput={setInput}
+            />
+          </div>
+          {allJobs.length === 0 && (
+            <div className="flex flex-col items-center">
+              <img
+                src="/not-found-logo.png"
+                alt="not-found-logo"
+                className="w-96 h-96"
+              />
+              <p className="text-center text-xl">
+                Maaf, pekerjaan yang kamu cari belum ada nih 🙏😊
+              </p>
+              <Button
+                variant="secondary"
+                className="mt-5 bg-primary bg-opacity-10 hover:bg-opacity-10 hover:bg-primary text-primary"
+                onClick={handleResetFilter}
+              >
+                Show all jobs
+              </Button>
+            </div>
+          )}
+          {loading ? (
+            <div className="grid grid-cols-3 gap-5">
+              {Array.from({
+                length: skeletonCount,
+              }).map((_, index) => (
+                <JobSkeleton key={index} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-5">
+              {allJobs.map((data, index) => (
+                <Job key={index} data={data} />
+              ))}
+            </div>
+          )}
+
+          {!loading && isFilterEmpty(selectedFilter) && (
+            <div className="w-full flex justify-center">
+              <Button
+                className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
+                onClick={() =>
+                  limit < totalJobs ? setLimit(limit + 6) : setLimit(limit - 6)
+                }
+              >
+                {limit < totalJobs ? "Lebih Banyak" : "Lebih Sedikit"}
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 }

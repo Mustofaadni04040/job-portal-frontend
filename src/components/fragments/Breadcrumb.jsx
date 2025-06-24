@@ -14,7 +14,9 @@ export default function Breadcrumbs({ textThird, textSecond, urlSecond }) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <Link href="/dashboard">Home</Link>
+          <Link href="/all-jobs" className="font-normal">
+            Semua Lowongan
+          </Link>
         </BreadcrumbItem>
         {!textThird && (
           <>
@@ -29,7 +31,9 @@ export default function Breadcrumbs({ textThird, textSecond, urlSecond }) {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={urlSecond || "#"}>{textSecond}</Link>
+                <Link href={urlSecond || "#"} className="font-normal">
+                  {textSecond}
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
