@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/fragments/Breadcrumb";
 import AppliedJobTable from "@/components/fragments/profilePage/AppliedJobTable";
 import UpdatePhotoModal from "@/components/fragments/profilePage/UpdatePhotoModal";
 import UpdateProfileModal from "@/components/fragments/profilePage/UpdateProfileModal";
@@ -44,7 +45,10 @@ export default function Profile() {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
+      <div className="max-w-7xl mx-auto my-10">
+        <Breadcrumbs textSecond="Profil" />
+      </div>
       <div className="relative max-w-4xl mx-auto border border-slate-200 rounded-xl my-5 p-8">
         <div className="flex gap-5">
           <Avatar className="relative">
@@ -103,7 +107,7 @@ export default function Profile() {
                   <a
                     target="blank"
                     href={user?.profile?.resume}
-                    className="w-fit flex items-center gap-1 bg-orange-500 shadow-md py-1 px-5 rounded-full text-white font-medium"
+                    className="w-fit flex items-center gap-3 bg-orange-500 shadow-md py-1 px-5 rounded-full text-white font-medium text-sm"
                   >
                     <File className="w-5 h-5" />
                     {user?.profile?.resumeOriginalName}
@@ -152,6 +156,6 @@ export default function Profile() {
           setOpenModal={setOpenModalPhoto}
         />
       )}
-    </div>
+    </>
   );
 }
