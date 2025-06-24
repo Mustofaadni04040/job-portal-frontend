@@ -27,17 +27,15 @@ export default function Job({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        <button>
-          {isArchived ? (
-            <button>
-              <Bookmark size={22} className="text-primary" fill="#ff498b" />
-            </button>
-          ) : (
-            <button>
-              <Bookmark size={22} className="text-primary" />
-            </button>
-          )}
-        </button>
+        {isArchived ? (
+          <button>
+            <Bookmark size={22} className="text-primary" fill="#ff498b" />
+          </button>
+        ) : (
+          <button>
+            <Bookmark size={22} className="text-primary" />
+          </button>
+        )}
       </div>
 
       <div className="mt-1">
