@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 
 export default function BrowseJobs({ data }) {
-  const isArchived = true;
   return (
     <div className="p-4 rounded-md shadow-md bg-white border border-gray-100 cursor-pointer">
       <div className="flex justify-between">
@@ -29,7 +28,7 @@ export default function BrowseJobs({ data }) {
           </div>
         </div>
         <button>
-          {isArchived ? (
+          {data.archived ? (
             <img src={archivedIcon} alt="archived-icon" className="w-5 h-5" />
           ) : (
             <img
@@ -67,7 +66,7 @@ export default function BrowseJobs({ data }) {
 
       <div className="flex items-center gap-2 mt-3">
         <Button variant="outline">
-          <a href={`/job-details/${data?._id}`}>Details</a>
+          <a href={`/job-details/${data?._id}`}>Detail</a>
         </Button>
         <Button className="bg-primary hover:bg-[#e7407d]">Apply</Button>
       </div>
@@ -88,5 +87,6 @@ BrowseJobs.propTypes = {
       name: PropTypes.string.isRequired,
       logo: PropTypes.string.isRequired,
     }),
+    archived: PropTypes.bool.isRequired,
   }),
 };

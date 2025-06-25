@@ -3,9 +3,7 @@ import verifiedIcon from "../../../assets/icons/verified-logo.svg";
 import locationIcon from "../../../assets/icons/location-icon.svg";
 import peopleIcon from "../../../assets/icons/people-icon.svg";
 import moneyIcon from "../../../assets/icons/money-icon.svg";
-import unarchivedIcon from "../../../assets/icons/unarchive-icon.svg";
-import archivedIcon from "../../../assets/icons/archive-icon.svg";
-import { Dot, FileUser } from "lucide-react";
+import { Bookmark, Dot, FileUser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import convertIDR from "@/utils/currency";
 import { timeAgo } from "@/utils/date";
@@ -17,8 +15,6 @@ export default function JobDetailsDescription({
   handleApplyJob,
   totalApplicants,
 }) {
-  const isArchived = false;
-
   return (
     <div className="min-h-[1000px] border border-slate-200 rounded-xl">
       <div className="flex justify-between m-8">
@@ -69,21 +65,15 @@ export default function JobDetailsDescription({
               >
                 {applied ? "Sudah Lamar" : "Lamar Sekarang"}
               </Button>
-              <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
-                {isArchived ? (
-                  <img
-                    src={archivedIcon}
-                    alt="archived-icon"
-                    className="w-5 h-5"
-                  />
-                ) : (
-                  <img
-                    src={unarchivedIcon}
-                    alt="unarchived-icon"
-                    className="w-5 h-5"
-                  />
-                )}
-              </button>
+              {detailJob.archived ? (
+                <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
+                  <Bookmark size={22} className="text-primary" fill="#ff498b" />
+                </button>
+              ) : (
+                <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
+                  <Bookmark size={22} className="text-primary" />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -145,6 +135,7 @@ JobDetailsDescription.propTypes = {
     position: PropTypes.number.isRequired,
     salary: PropTypes.number.isRequired,
     requirements: PropTypes.array.isRequired,
+    archived: PropTypes.bool.isRequired,
   }),
   applied: PropTypes.bool.isRequired,
   handleApplyJob: PropTypes.func.isRequired,

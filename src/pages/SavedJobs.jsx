@@ -1,28 +1,68 @@
 import Breadcrumbs from "@/components/fragments/Breadcrumb";
+import SavedJobsCard from "@/components/fragments/savedJobsPage/SavedJobsCard";
 import { Button } from "@/components/ui/button";
+import { setSavedJobs } from "@/redux/jobSlice";
+import { getData } from "@/utils/fetch";
+import debounce from "debounce-promise";
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SavedJobs() {
+  const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
+  const dispatch = useDispatch();
+  const { savedJobs } = useSelector((store) => store.job);
+
+  useEffect(() => {
+    const fetchSavadJobs = async () => {
+      try {
+        const res = await debouncedGetData(
+          `${import.meta.env.VITE_BOOKMARK_API_END_POINT}/get-bookmarks`,
+          "",
+          null,
+          true
+        );
+
+        if (res.data.success) {
+          dispatch(setSavedJobs(res.data.bookmarks));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchSavadJobs();
+  }, [debouncedGetData, dispatch]);
   return (
     <>
       <div className="max-w-7xl mx-auto mt-10">
         <Breadcrumbs textSecond="Lowongan Tersimpan" />
       </div>
 
-      <div className="max-w-5xl mx-auto my-10">
-        <div className="flex flex-col items-center">
-          <img
-            src="/not-found-logo.png"
-            alt="not-found-logo"
-            className="w-96 h-96"
-          />
-          <p className="text-center text-xl">
-            Belum ada lowongan yang kamu simpan nih!
-          </p>
-          <Button className="bg-primary hover:bg-[#e7407d] mt-5">
-            <a href={`/all-jobs`}>Lihat semua lowongan</a>
-          </Button>
+      {savedJobs.length === 0 ? (
+        <div className="max-w-5xl mx-auto my-10">
+          <div className="flex flex-col items-center">
+            <img
+              src="/not-found-logo.png"
+              alt="not-found-logo"
+              className="w-96 h-96"
+            />
+            <p className="text-center text-xl">
+              Belum ada lowongan yang kamu simpan nih!
+            </p>
+            <Button className="bg-primary hover:bg-[#e7407d] mt-5">
+              <a href={`/all-jobs`}>Lihat semua lowongan</a>
+            </Button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="max-w-5xl mx-auto my-10">
+          <div className="grid grid-cols-3 gap-5 my-5">
+            {savedJobs.map((data, index) => (
+              <SavedJobsCard key={`${data?._id}-${index}`} data={data.job} />
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }

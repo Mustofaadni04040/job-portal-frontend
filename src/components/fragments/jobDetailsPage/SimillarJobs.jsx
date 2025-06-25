@@ -1,17 +1,13 @@
 import verifiedIcon from "../../../assets/icons/verified-logo.svg";
-import unarchivedIcon from "../../../assets/icons/unarchive-icon.svg";
-import archivedIcon from "../../../assets/icons/archive-icon.svg";
 import locationIcon from "../../../assets/icons/location-icon.svg";
 import peopleIcon from "../../../assets/icons/people-icon.svg";
 import moneyIcon from "../../../assets/icons/money-icon.svg";
-import { Dot } from "lucide-react";
+import { Bookmark, Dot } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 
 export default function SimillarJobs({ data }) {
-  const isArchived = false;
-
   return (
     <div className="p-4 rounded-md shadow-md bg-white border border-gray-100 cursor-pointer">
       <div className="flex justify-between">
@@ -25,17 +21,15 @@ export default function SimillarJobs({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        <button>
-          {isArchived ? (
-            <img src={archivedIcon} alt="archived-icon" className="w-5 h-5" />
-          ) : (
-            <img
-              src={unarchivedIcon}
-              alt="unarchived-icon"
-              className="w-5 h-5"
-            />
-          )}
-        </button>
+        {data.archived ? (
+          <button>
+            <Bookmark size={22} className="text-primary" fill="#ff498b" />
+          </button>
+        ) : (
+          <button>
+            <Bookmark size={22} className="text-primary" />
+          </button>
+        )}
       </div>
 
       <div className="mt-1">
@@ -60,7 +54,7 @@ export default function SimillarJobs({ data }) {
 
       <div className="flex items-center gap-2 mt-3">
         <Button className="bg-primary hover:bg-[#e7407d]">
-          <a href={`/job-details/${data?._id}`}>Details</a>
+          <a href={`/job-details/${data?._id}`}>Detail</a>
         </Button>
       </div>
     </div>
@@ -80,5 +74,6 @@ SimillarJobs.propTypes = {
       name: PropTypes.string.isRequired,
       logo: PropTypes.string.isRequired,
     }),
+    archived: PropTypes.bool.isRequired,
   }),
 };
