@@ -8,30 +8,23 @@ export async function getData(url, params, token, withCredentials) {
   });
 }
 
-export async function postData(url, payload, formData, token) {
-  return await axios.post(
-    `${import.meta.env.VITE_JOB_API_END_POINT}${url}`,
-    payload,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type":
-          formData === "multipart" ? "multipart/form-data" : "application/json",
-      },
-    }
-  );
+export async function postData(url, payload, formData, withCredentials, token) {
+  return await axios.post(`${url}`, payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type":
+        formData === "multipart" ? "multipart/form-data" : "application/json",
+    },
+    withCredentials: withCredentials ? true : false,
+  });
 }
 
-export async function putData(url, payload, token) {
-  return await axios.put(
-    `${import.meta.env.VITE_JOB_API_END_POINT}${url}`,
-    payload,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export async function putData(url, payload, token, withCredentials) {
+  console.log(payload);
+  return await axios.put(`${url}`, payload, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    withCredentials: withCredentials ? true : false,
+  });
 }
 
 export async function deleteData(url, token) {
