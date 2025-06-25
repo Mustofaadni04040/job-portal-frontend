@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import convertIDR from "@/utils/currency";
 import { timeAgo } from "@/utils/date";
 import PropTypes from "prop-types";
+import useAddedArchived from "@/hooks/useAddedArchive";
 
 export default function JobDetailsDescription({
   detailJob,
@@ -15,6 +16,8 @@ export default function JobDetailsDescription({
   handleApplyJob,
   totalApplicants,
 }) {
+  const { handleAddArchive, archived } = useAddedArchived();
+
   return (
     <div className="min-h-[1000px] border border-slate-200 rounded-xl">
       <div className="flex justify-between m-8">
@@ -65,12 +68,15 @@ export default function JobDetailsDescription({
               >
                 {applied ? "Sudah Lamar" : "Lamar Sekarang"}
               </Button>
-              {detailJob.archived ? (
+              {detailJob.archived || archived ? (
                 <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
                   <Bookmark size={22} className="text-primary" fill="#ff498b" />
                 </button>
               ) : (
-                <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
+                <button
+                  className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50"
+                  onClick={() => handleAddArchive(detailJob?._id)}
+                >
                   <Bookmark size={22} className="text-primary" />
                 </button>
               )}
