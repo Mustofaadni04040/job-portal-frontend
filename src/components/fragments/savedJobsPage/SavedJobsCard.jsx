@@ -58,7 +58,7 @@ export default function SavedJobsCard({ data }) {
         </div>
 
         <p className="mt-3 text-sm text-slate-400">
-          {data?.description.slice(0, 60)}...
+          {data?.description?.slice(0, 60)}...
         </p>
       </div>
 

@@ -111,7 +111,7 @@ export default function Jobs() {
   };
 
   return (
-    <>
+    <div className="mb-10">
       <div className="max-w-7xl mx-auto my-10">
         <Breadcrumbs />
       </div>
@@ -176,6 +176,6 @@ export default function Jobs() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

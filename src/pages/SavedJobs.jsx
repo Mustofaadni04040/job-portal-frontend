@@ -1,18 +1,23 @@
 import Breadcrumbs from "@/components/fragments/Breadcrumb";
+import JobSkeleton from "@/components/fragments/JobSkeleton";
 import SavedJobsCard from "@/components/fragments/savedJobsPage/SavedJobsCard";
 import { Button } from "@/components/ui/button";
 import { setSavedJobs } from "@/redux/jobSlice";
 import { getData } from "@/utils/fetch";
 import debounce from "debounce-promise";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SavedJobs() {
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
   const dispatch = useDispatch();
   const { savedJobs } = useSelector((store) => store.job);
+  const [loading, setLoading] = useState(false);
+  const [skeletonCount, setSkeletonCount] = useState(6);
+  console.log(skeletonCount);
 
   useEffect(() => {
+    setLoading(true);
     const fetchSavadJobs = async () => {
       try {
         const res = await debouncedGetData(
@@ -23,10 +28,13 @@ export default function SavedJobs() {
         );
 
         if (res.data.success) {
-          dispatch(setSavedJobs(res.data.bookmarks));
+          dispatch(setSavedJobs(res?.data?.bookmarks));
+          setSkeletonCount(res?.data?.bookmarks?.length);
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,11 +64,21 @@ export default function SavedJobs() {
         </div>
       ) : (
         <div className="max-w-5xl mx-auto my-10">
-          <div className="grid grid-cols-3 gap-5 my-5">
-            {savedJobs.map((data, index) => (
-              <SavedJobsCard key={`${data?._id}-${index}`} data={data.job} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-3 gap-5">
+              {Array.from({
+                length: skeletonCount,
+              }).map((_, index) => (
+                <JobSkeleton key={index} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-5">
+              {savedJobs.map((data, index) => (
+                <SavedJobsCard key={index} data={data.job} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </>
