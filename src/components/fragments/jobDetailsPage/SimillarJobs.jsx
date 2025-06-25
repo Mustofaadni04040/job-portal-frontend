@@ -6,8 +6,11 @@ import { Bookmark, Dot } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
+import useAddedArchived from "@/hooks/useAddedArchive";
 
 export default function SimillarJobs({ data }) {
+  const { handleAddArchive, archived } = useAddedArchived();
+
   return (
     <div className="p-4 rounded-md shadow-md bg-white border border-gray-100 cursor-pointer">
       <div className="flex justify-between">
@@ -21,12 +24,12 @@ export default function SimillarJobs({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        {data.archived ? (
+        {data.archived || archived ? (
           <button>
             <Bookmark size={22} className="text-primary" fill="#ff498b" />
           </button>
         ) : (
-          <button>
+          <button onClick={() => handleAddArchive(data?._id)}>
             <Bookmark size={22} className="text-primary" />
           </button>
         )}
