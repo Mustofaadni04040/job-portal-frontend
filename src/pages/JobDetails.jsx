@@ -108,29 +108,46 @@ export default function JobDetails() {
             totalApplicants={totalApplicants}
           />
         </div>
-        {user &&
-          (simillarJobs.length === 0 ? (
-            <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
-              <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
+        <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
+          <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
+          {!user && (
+            <>
               <img
                 src="/not-found-logo.png"
                 alt="not-found-logo"
                 className="w-72 h-auto mx-auto"
               />
               <p className="text-center text-sm font-semibold">
-                Update skill anda untuk mendapatkan rekomendasi
+                Login dan Update skill anda untuk mendapatkan rekomendasi
+                lowongan
               </p>
-            </div>
-          ) : (
-            <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
-              <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
-              <div className="flex flex-col gap-3">
-                {simillarJobs.map((data, index) => (
-                  <SimillarJobs key={index} data={data} />
-                ))}
-              </div>
-            </div>
-          ))}
+            </>
+          )}
+          {user &&
+            (simillarJobs.length === 0 ? (
+              <>
+                <img
+                  src="/not-found-logo.png"
+                  alt="not-found-logo"
+                  className="w-72 h-auto mx-auto"
+                />
+                <p className="text-center text-sm font-semibold">
+                  Update skill anda untuk mendapatkan rekomendasi
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="text-lg font-bold mb-3">
+                  Sesuai Kemampuan Anda
+                </h1>
+                <div className="flex flex-col gap-3">
+                  {simillarJobs.map((data, index) => (
+                    <SimillarJobs key={index} data={data} />
+                  ))}
+                </div>
+              </>
+            ))}
+        </div>
       </div>
     </div>
   );

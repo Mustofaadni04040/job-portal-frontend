@@ -26,8 +26,6 @@ export default function LatestJobs() {
           true
         );
 
-        console.log(res);
-
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);
           setLatestJobs(res?.data?.jobs);
