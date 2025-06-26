@@ -7,9 +7,11 @@ import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import useAddedArchived from "@/hooks/useAddedArchive";
+import { useSelector } from "react-redux";
 
 export default function SimillarJobs({ data }) {
   const { handleAddArchive, archived } = useAddedArchived();
+  const { getArchived } = useSelector((state) => state.job);
 
   return (
     <div className="p-4 rounded-md shadow-md bg-white border border-gray-100 cursor-pointer">
@@ -24,7 +26,7 @@ export default function SimillarJobs({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        {data.archived || archived ? (
+        {getArchived.includes(data?._id.toString()) || archived ? (
           <button>
             <Bookmark size={22} className="text-primary" fill="#ff498b" />
           </button>
@@ -77,6 +79,5 @@ SimillarJobs.propTypes = {
       name: PropTypes.string.isRequired,
       logo: PropTypes.string.isRequired,
     }),
-    archived: PropTypes.bool.isRequired,
   }),
 };

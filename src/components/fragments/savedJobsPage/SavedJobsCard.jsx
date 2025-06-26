@@ -7,9 +7,10 @@ import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
+import { useSelector } from "react-redux";
 
 export default function SavedJobsCard({ data }) {
-  console.log(data);
+  const { getArchived } = useSelector((state) => state.job);
 
   return (
     <div className="p-4 flex flex-col justify-between rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
@@ -27,7 +28,7 @@ export default function SavedJobsCard({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        {data.archived ? (
+        {getArchived.includes(data?._id.toString()) ? (
           <button>
             <Bookmark size={22} className="text-primary" fill="#ff498b" />
           </button>
@@ -84,6 +85,5 @@ SavedJobsCard.propTypes = {
       name: PropTypes.string.isRequired,
       logo: PropTypes.string.isRequired,
     }),
-    archived: PropTypes.bool.isRequired,
   }),
 };

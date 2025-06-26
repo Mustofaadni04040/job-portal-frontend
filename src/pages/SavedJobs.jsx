@@ -14,7 +14,6 @@ export default function SavedJobs() {
   const { savedJobs } = useSelector((store) => store.job);
   const [loading, setLoading] = useState(false);
   const [skeletonCount, setSkeletonCount] = useState(6);
-  console.log(skeletonCount);
 
   useEffect(() => {
     setLoading(true);
@@ -46,7 +45,7 @@ export default function SavedJobs() {
         <Breadcrumbs textSecond="Lowongan Tersimpan" />
       </div>
 
-      {savedJobs.length === 0 ? (
+      {savedJobs.length === 0 && (
         <div className="max-w-5xl mx-auto my-10">
           <div className="flex flex-col items-center">
             <img
@@ -62,25 +61,25 @@ export default function SavedJobs() {
             </Button>
           </div>
         </div>
-      ) : (
-        <div className="max-w-5xl mx-auto my-10">
-          {loading ? (
-            <div className="grid grid-cols-3 gap-5">
-              {Array.from({
-                length: skeletonCount,
-              }).map((_, index) => (
-                <JobSkeleton key={index} />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-3 gap-5">
-              {savedJobs.map((data, index) => (
-                <SavedJobsCard key={index} data={data.job} />
-              ))}
-            </div>
-          )}
-        </div>
       )}
+
+      <div className="max-w-5xl mx-auto my-10">
+        {loading ? (
+          <div className="grid grid-cols-3 gap-5">
+            {Array.from({
+              length: skeletonCount,
+            }).map((_, index) => (
+              <JobSkeleton key={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-5">
+            {savedJobs.map((data, index) => (
+              <SavedJobsCard key={index} data={data.job} />
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }

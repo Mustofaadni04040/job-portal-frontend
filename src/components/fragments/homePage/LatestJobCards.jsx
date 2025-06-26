@@ -8,9 +8,11 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 import useAddedArchived from "@/hooks/useAddedArchive";
+import { useSelector } from "react-redux";
 
 export default function LatestJobCards({ data }) {
   const { handleAddArchive, archived } = useAddedArchived();
+  const { getArchived } = useSelector((state) => state.job);
 
   return (
     <div className="flex flex-col justify-between my-3 p-4 rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
@@ -28,7 +30,7 @@ export default function LatestJobCards({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        {data.archived || archived ? (
+        {getArchived.includes(data?._id.toString()) || archived ? (
           <button>
             <Bookmark size={22} className="text-primary" fill="#ff498b" />
           </button>
@@ -85,6 +87,5 @@ LatestJobCards.propTypes = {
       name: PropTypes.string.isRequired,
       logo: PropTypes.string.isRequired,
     }),
-    archived: PropTypes.bool.isRequired,
   }),
 };

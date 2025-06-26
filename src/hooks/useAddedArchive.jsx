@@ -1,14 +1,14 @@
 import { useToast } from "./use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { setArchived } from "@/redux/jobSlice";
 import axios from "axios";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function useAddedArchived() {
   const { toast } = useToast();
-  const [archived, setArchived] = useState(false);
+  const dispatch = useDispatch();
 
   const handleAddArchive = async (jobId) => {
-    console.log("hooks", jobId);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BOOKMARK_API_END_POINT}/add-bookmark`,
@@ -22,7 +22,7 @@ export default function useAddedArchived() {
       );
 
       if (res.data.success) {
-        setArchived(true);
+        dispatch(setArchived(true));
         toast({
           title: "Success",
           description: res?.data?.message,
@@ -39,5 +39,5 @@ export default function useAddedArchived() {
     }
   };
 
-  return { handleAddArchive, archived };
+  return { handleAddArchive };
 }

@@ -15,6 +15,7 @@ import { ToastAction } from "../ui/toast";
 import { useToast } from "@/hooks/use-toast";
 import PropTypes from "prop-types";
 import Cookies from "js-cookie";
+import { setSavedJobs } from "@/redux/jobSlice";
 
 const NavUrl = [
   {
@@ -46,6 +47,7 @@ const HandleOpenPopover = ({ open, setOpen }) => {
         Cookies.remove("user");
         dispatch(setUser(null));
         dispatch(setToken(null));
+        dispatch(setSavedJobs([]));
         navigate("/");
         toast({
           title: "Success logout",

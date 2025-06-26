@@ -3,7 +3,7 @@ import JobSkeleton from "@/components/fragments/JobSkeleton";
 import FilterJobs from "@/components/fragments/jobsPage/FilterJobs";
 import Job from "@/components/fragments/jobsPage/Job";
 import { Button } from "@/components/ui/button";
-import { setAllJobs } from "@/redux/jobSlice";
+import { setAllJobs, setGetArchived } from "@/redux/jobSlice";
 import { isFilterEmpty } from "@/utils/emptyFilter";
 import { getData } from "@/utils/fetch";
 import debounce from "debounce-promise";
@@ -73,13 +73,16 @@ export default function Jobs() {
           `${import.meta.env.VITE_JOB_API_END_POINT}/get-jobs`,
           params,
           null,
-          false
+          true
         );
+
+        console.log(res);
 
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);
           setTotalJobs(res?.data?.total);
           dispatch(setAllJobs(res?.data?.jobs));
+          dispatch(setGetArchived(res?.data?.archived.map((item) => item._id)));
         }
       } catch (error) {
         console.log(error);

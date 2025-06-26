@@ -9,8 +9,10 @@ import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
+import { useSelector } from "react-redux";
 
 export default function BrowseJobs({ data }) {
+  const { getArchived } = useSelector((state) => state.job);
   return (
     <div className="p-4 rounded-md shadow-md bg-white border border-gray-100 cursor-pointer">
       <div className="flex justify-between">
@@ -28,7 +30,7 @@ export default function BrowseJobs({ data }) {
           </div>
         </div>
         <button>
-          {data.archived ? (
+          {getArchived.includes(data?._id.toString()) ? (
             <img src={archivedIcon} alt="archived-icon" className="w-5 h-5" />
           ) : (
             <img
@@ -87,6 +89,5 @@ BrowseJobs.propTypes = {
       name: PropTypes.string.isRequired,
       logo: PropTypes.string.isRequired,
     }),
-    archived: PropTypes.bool.isRequired,
   }),
 };

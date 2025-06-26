@@ -9,6 +9,7 @@ import convertIDR from "@/utils/currency";
 import { timeAgo } from "@/utils/date";
 import PropTypes from "prop-types";
 import useAddedArchived from "@/hooks/useAddedArchive";
+import { useSelector } from "react-redux";
 
 export default function JobDetailsDescription({
   detailJob,
@@ -17,6 +18,7 @@ export default function JobDetailsDescription({
   totalApplicants,
 }) {
   const { handleAddArchive, archived } = useAddedArchived();
+  const { getArchived } = useSelector((state) => state.job);
 
   return (
     <div className="min-h-[1000px] border border-slate-200 rounded-xl">
@@ -68,7 +70,7 @@ export default function JobDetailsDescription({
               >
                 {applied ? "Sudah Lamar" : "Lamar Sekarang"}
               </Button>
-              {detailJob.archived || archived ? (
+              {getArchived.includes(detailJob?._id.toString()) || archived ? (
                 <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
                   <Bookmark size={22} className="text-primary" fill="#ff498b" />
                 </button>
@@ -141,7 +143,6 @@ JobDetailsDescription.propTypes = {
     position: PropTypes.number.isRequired,
     salary: PropTypes.number.isRequired,
     requirements: PropTypes.array.isRequired,
-    archived: PropTypes.bool.isRequired,
   }),
   applied: PropTypes.bool.isRequired,
   handleApplyJob: PropTypes.func.isRequired,
