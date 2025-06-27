@@ -83,4 +83,14 @@ input[type="number"]::-webkit-outer-spin-button {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+  .description-content ul,
+  .description-content ol {
+    list-style: disc;
+    margin-left: 1.5em;
+  }
+  .description-content ul li::marker,
+  .description-content ol li::marker {
+    color: #ff498b;
+    font-size: 20px;
+  }
 }

@@ -121,7 +121,7 @@ export default function JobDetailsDescription({
         </div>
         <div>
           <h3 className="text-lg font-bold mb-2">Deskripsi Pekerjaan</h3>
-          <div className="text-sm font-normal">
+          <div className="description-content text-sm font-normal">
             {HTMLReactParser(detailJob?.description)}
           </div>
         </div>
