@@ -8,9 +8,12 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 import { useSelector } from "react-redux";
+import useSavedJobs from "@/hooks/useSavedJobs";
 
 export default function SavedJobsCard({ data }) {
+  const { handleAddArchive, handleRemoveArchive } = useSavedJobs();
   const { getArchived } = useSelector((state) => state.job);
+  const isArchived = getArchived.includes(data?._id);
 
   return (
     <div className="p-4 flex flex-col justify-between rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
@@ -28,13 +31,22 @@ export default function SavedJobsCard({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        {getArchived.includes(data?._id.toString()) ? (
+        {isArchived ? (
           <button>
-            <Bookmark size={22} className="text-primary" fill="#ff498b" />
+            <Bookmark
+              size={22}
+              className="text-primary"
+              fill="#ff498b"
+              onClick={() => handleRemoveArchive(data?._id)}
+            />
           </button>
         ) : (
           <button>
-            <Bookmark size={22} className="text-primary" />
+            <Bookmark
+              size={22}
+              className="text-primary"
+              onClick={() => handleAddArchive(data?._id)}
+            />
           </button>
         )}
       </div>

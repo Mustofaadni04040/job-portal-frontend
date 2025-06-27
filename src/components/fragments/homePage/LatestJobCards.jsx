@@ -7,13 +7,14 @@ import { Button } from "../../ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
-import useAddedArchived from "@/hooks/useAddedArchive";
 import { useSelector } from "react-redux";
 import { replaceHTMLTags } from "@/utils/replaceTags";
+import useSavedJobs from "@/hooks/useSavedJobs";
 
 export default function LatestJobCards({ data }) {
-  const { handleAddArchive, archived } = useAddedArchived();
+  const { handleAddArchive, handleRemoveArchive } = useSavedJobs();
   const { getArchived } = useSelector((state) => state.job);
+  const isArchived = getArchived.includes(data?._id);
 
   return (
     <div className="flex flex-col justify-between my-3 p-4 rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
@@ -31,9 +32,14 @@ export default function LatestJobCards({ data }) {
             <img src={verifiedIcon} alt="verfied-icon" className="w-3 h-3" />
           </div>
         </div>
-        {getArchived.includes(data?._id.toString()) || archived ? (
+        {isArchived ? (
           <button>
-            <Bookmark size={22} className="text-primary" fill="#ff498b" />
+            <Bookmark
+              size={22}
+              className="text-primary"
+              fill="#ff498b"
+              onClick={() => handleRemoveArchive(data?._id)}
+            />
           </button>
         ) : (
           <button onClick={() => handleAddArchive(data?._id)}>
