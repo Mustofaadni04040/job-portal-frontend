@@ -1,4 +1,5 @@
 import "./App.css";
+import "./jodit-fixes.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
