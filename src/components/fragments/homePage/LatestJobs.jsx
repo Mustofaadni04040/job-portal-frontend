@@ -59,7 +59,7 @@ export default function LatestJobs() {
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-5 my-5">
-          {latestJobs.slice(0, 6).map((data, index) => (
+          {latestJobs.map((data, index) => (
             <LatestJobCards key={`${data?._id}-${index}`} data={data} />
           ))}
         </div>

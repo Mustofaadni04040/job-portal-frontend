@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-const disabledFooter = ["sign-in", "sign-up", "browse", "profile", "recruiter"];
+const disabledFooter = ["sign-in", "sign-up", "profile", "recruiter"];
 
 export default function Footer() {
   const { pathname } = useLocation();
