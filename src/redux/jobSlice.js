@@ -8,7 +8,6 @@ const jobSlice = createSlice({
     detailJob: {},
     applied: false,
     jobsApplied: [],
-    searchJob: "",
     searchQuery: "",
     savedJobs: [],
     archived: false,
@@ -27,9 +26,6 @@ const jobSlice = createSlice({
     },
     setAllRecruiterJobs: (state, action) => {
       state.allRecruiterJobs = action.payload;
-    },
-    setSearchJob: (state, action) => {
-      state.searchJob = action.payload;
     },
     setJobsApplied: (state, action) => {
       state.jobsApplied = action.payload;
@@ -54,7 +50,6 @@ export const {
   setDetailJob,
   setApplied,
   setAllRecruiterJobs,
-  setSearchJob,
   setJobsApplied,
   setSearchQuery,
   setSavedJobs,
