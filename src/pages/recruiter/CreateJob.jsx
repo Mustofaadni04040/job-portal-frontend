@@ -12,15 +12,15 @@ import {
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
+import JoditEditor from "jodit-react";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateJob() {
   const [input, setInput] = useState({
     title: "",
-    description: "",
     requirements: "",
     salary: "",
     location: "",
@@ -33,6 +33,9 @@ export default function CreateJob() {
   const { companies } = useSelector((store) => store.company);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const descriptionRef = useRef("");
+
+  console.log(descriptionRef);
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -52,7 +55,10 @@ export default function CreateJob() {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_JOB_API_END_POINT}/post-job`,
-        input,
+        {
+          ...input,
+          description: descriptionRef.current,
+        },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -78,12 +84,23 @@ export default function CreateJob() {
       setLoading(false);
     }
   };
+
+  const config = {
+    readonly: false,
+    height: 400,
+    toolbarButtonSize: "middle",
+    buttons: ["bold", "italic", "underline", "link", "unlink", "source"],
+    uploader: {
+      insertImageAsBase64URI: true,
+    },
+    placeholder: "Description Job",
+  };
   return (
     <div className="max-w-3xl mx-auto my-10">
       <h1 className="text-2xl font-medium">Post New Job</h1>
 
       <form onSubmit={handleSubmit} className="my-5">
-        <div className="grid grid-cols-3 gap-3">
+        <div className="flex flex-col gap-2">
           <div className="my-3">
             <Label>Role Job</Label>
             <Input
@@ -96,12 +113,11 @@ export default function CreateJob() {
           </div>
           <div className="my-3">
             <Label>Description Job</Label>
-            <Input
-              type="text"
-              name="description"
+            <JoditEditor
+              config={config}
+              ref={descriptionRef}
               value={input.description}
-              onChange={handleChangeInput}
-              required
+              onChange={(value) => (descriptionRef.current = value)}
             />
           </div>
           <div className="my-3">

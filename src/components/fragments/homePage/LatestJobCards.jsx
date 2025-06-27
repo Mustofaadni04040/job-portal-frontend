@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 import useAddedArchived from "@/hooks/useAddedArchive";
 import { useSelector } from "react-redux";
+import { replaceHTMLTags } from "@/utils/replaceTags";
 
 export default function LatestJobCards({ data }) {
   const { handleAddArchive, archived } = useAddedArchived();
@@ -60,9 +61,10 @@ export default function LatestJobCards({ data }) {
           </p>
         </div>
 
-        <p className="mt-3 text-sm text-slate-400">
-          {data?.description.slice(0, 60)}...
-        </p>
+        <div className="mt-3 text-sm text-slate-400">
+          {replaceHTMLTags(data?.description.slice(0, 60))}
+          ...
+        </div>
       </div>
 
       <div className="mt-3">

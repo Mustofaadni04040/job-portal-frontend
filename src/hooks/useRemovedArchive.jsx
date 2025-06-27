@@ -31,7 +31,7 @@ export default function useRemovedArchive() {
       console.log(error);
       toast({
         variant: "destructive",
-        title: "Failed to sign in",
+        title: "Failed to remove saved job",
         description: error?.response?.data?.message,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });

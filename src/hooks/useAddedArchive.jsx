@@ -32,7 +32,7 @@ export default function useAddedArchived() {
       console.log(error);
       toast({
         variant: "destructive",
-        title: "Failed to sign in",
+        title: "Failed to add saved job",
         description: error?.response?.data?.message,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });

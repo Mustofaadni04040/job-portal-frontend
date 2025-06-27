@@ -61,9 +61,9 @@ export default function BrowseJobs({ data }) {
           </p>
         </div>
 
-        <p className="mt-3 text-sm text-slate-400">
+        <div className="mt-3 text-sm text-slate-400">
           {data?.description.slice(0, 60)}...
-        </p>
+        </div>
       </div>
 
       <div className="flex items-center gap-2 mt-3">

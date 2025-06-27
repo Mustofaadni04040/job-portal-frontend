@@ -54,7 +54,7 @@ export default function SimillarJobs({ data }) {
           <p className="flex items-center text-sm">{data?.salary}</p>
         </div>
 
-        <p className="mt-3 text-sm text-slate-400">{data?.description}</p>
+        <div className="mt-3 text-sm text-slate-400">{data?.description}</div>
       </div>
 
       <div className="flex items-center gap-2 mt-3">

@@ -10,6 +10,7 @@ import { timeAgo } from "@/utils/date";
 import PropTypes from "prop-types";
 import useAddedArchived from "@/hooks/useAddedArchive";
 import { useSelector } from "react-redux";
+import HTMLReactParser from "html-react-parser";
 
 export default function JobDetailsDescription({
   detailJob,
@@ -120,7 +121,9 @@ export default function JobDetailsDescription({
         </div>
         <div>
           <h3 className="text-lg font-bold mb-2">Deskripsi Pekerjaan</h3>
-          <p className="text-sm font-normal">{detailJob?.description}</p>
+          <div className="text-sm font-normal">
+            {HTMLReactParser(detailJob?.description)}
+          </div>
         </div>
       </div>
     </div>
