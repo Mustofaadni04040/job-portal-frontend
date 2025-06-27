@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import convertIDR from "@/utils/currency";
 import { timeAgo } from "@/utils/date";
 import PropTypes from "prop-types";
-import useAddedArchived from "@/hooks/useAddedArchive";
 import { useSelector } from "react-redux";
 import HTMLReactParser from "html-react-parser";
+import useSavedJobs from "@/hooks/useSavedJobs";
 
 export default function JobDetailsDescription({
   detailJob,
@@ -18,8 +18,9 @@ export default function JobDetailsDescription({
   handleApplyJob,
   totalApplicants,
 }) {
-  const { handleAddArchive, archived } = useAddedArchived();
+  const { handleAddArchive, handleRemoveArchive } = useSavedJobs();
   const { getArchived } = useSelector((state) => state.job);
+  const isArchived = getArchived.includes(detailJob?._id);
 
   return (
     <div className="min-h-[1000px] border border-slate-200 rounded-xl">
@@ -71,9 +72,14 @@ export default function JobDetailsDescription({
               >
                 {applied ? "Sudah Lamar" : "Lamar Sekarang"}
               </Button>
-              {getArchived.includes(detailJob?._id.toString()) || archived ? (
+              {isArchived ? (
                 <button className="border border-slate-200 p-2 bg-white rounded-full hover:bg-slate-50">
-                  <Bookmark size={22} className="text-primary" fill="#ff498b" />
+                  <Bookmark
+                    size={22}
+                    className="text-primary"
+                    fill="#ff498b"
+                    onClick={() => handleRemoveArchive(detailJob?._id)}
+                  />
                 </button>
               ) : (
                 <button
