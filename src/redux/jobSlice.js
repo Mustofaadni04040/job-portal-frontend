@@ -10,7 +10,6 @@ const jobSlice = createSlice({
     jobsApplied: [],
     searchQuery: "",
     savedJobs: [],
-    archived: false,
     getArchived: [],
   },
   reducers: {
@@ -36,7 +35,17 @@ const jobSlice = createSlice({
     setSavedJobs: (state, action) => {
       state.savedJobs = action.payload;
     },
-    setArchived: (state, action) => {
+    addArchivedJob: (state, action) => {
+      if (!state.getArchived.includes(action.payload)) {
+        state.getArchived.push(action.payload);
+      }
+    },
+    removeArchivedJob: (state, action) => {
+      state.getArchived = state.getArchived.filter(
+        (id) => id !== action.payload
+      );
+    },
+    setRemovedArchived: (state, action) => {
       state.archived = action.payload;
     },
     setGetArchived: (state, action) => {
@@ -55,5 +64,7 @@ export const {
   setSavedJobs,
   setArchived,
   setGetArchived,
+  addArchivedJob,
+  removeArchivedJob,
 } = jobSlice.actions;
 export default jobSlice.reducer;
