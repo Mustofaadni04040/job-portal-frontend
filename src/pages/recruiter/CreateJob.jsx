@@ -35,8 +35,6 @@ export default function CreateJob() {
   const { toast } = useToast();
   const descriptionRef = useRef("");
 
-  console.log(descriptionRef);
-
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
