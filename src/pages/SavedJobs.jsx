@@ -45,7 +45,7 @@ export default function SavedJobs() {
         <Breadcrumbs textSecond="Lowongan Tersimpan" />
       </div>
 
-      {savedJobs.length === 0 && (
+      {savedJobs.length === 0 && !loading && (
         <div className="max-w-5xl mx-auto my-10">
           <div className="flex flex-col items-center">
             <img
