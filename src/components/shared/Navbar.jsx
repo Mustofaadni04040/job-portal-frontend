@@ -1,11 +1,6 @@
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@radix-ui/react-popover";
+import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "../ui/button";
-import { LogOut, User2 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -13,81 +8,14 @@ import axios from "axios";
 import { setToken, setUser } from "@/redux/authSlice";
 import { ToastAction } from "../ui/toast";
 import { useToast } from "@/hooks/use-toast";
-import PropTypes from "prop-types";
 import Cookies from "js-cookie";
 import { setGetArchived, setSavedJobs } from "@/redux/jobSlice";
 import useMobile from "@/hooks/useMobile";
-
-const NavUrl = [
-  {
-    title: "Beranda",
-    url: "/",
-  },
-  {
-    title: "Lowongan",
-    url: "/all-jobs",
-  },
-];
+import { PopoverProfile } from "../PopoverProfile";
+import { NavUrl } from "@/utils/navUrl";
+import DrawerProfile from "../fragments/DrawerProfile";
 
 const disabledNavbar = ["sign-in", "sign-up"];
-
-const HandleOpenPopover = ({ open, setOpen, handleLogout }) => {
-  const { user } = useSelector((store) => store.auth);
-
-  if (open) {
-    return (
-      <PopoverContent className="absolute right-0 bg-white z-50 w-80 space-y-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-md pt-3 pl-3 pb-3">
-        <div className="flex gap-5">
-          <Avatar>
-            <AvatarImage
-              alt="avatar"
-              src={
-                user?.profile?.profilePhoto
-                  ? user?.profile?.profilePhoto
-                  : "https://github.com/shadcn.png"
-              }
-              className="min-w-8 h-8 rounded-full"
-            />
-          </Avatar>
-          <div>
-            <h4 className="font-medium">{user?.fullname}</h4>
-            <p className="text-sm text-muted-foreground">
-              {user?.profile?.bio}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col text-gray-600">
-          {user && user?.role === "job-seeker" && (
-            <>
-              <div className="flex w-fit items-center gap-2 cursor-pointer">
-                <User2 />
-                <Button variant="link" onClick={() => setOpen(!open)}>
-                  <Link to={"/profile"}>View Profile</Link>
-                </Button>
-              </div>
-            </>
-          )}
-          <div className="flex w-fit items-center gap-2 cursor-pointer">
-            <LogOut />
-            <Button variant="link" onClick={() => setOpen(!open)}>
-              <Link onClick={handleLogout}>Sign out</Link>
-            </Button>
-          </div>
-        </div>
-      </PopoverContent>
-    );
-  } else {
-    return null;
-  }
-};
-
-HandleOpenPopover.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-};
-
 export default function Navbar() {
   const { pathname } = useLocation();
   const { user } = useSelector((store) => store.auth);
@@ -144,7 +72,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`sticky left-0 top-0 w-full z-[999] bg-white ${
+      className={`sticky left-0 top-0 w-full z-[49] bg-white ${
         isSticky ? "shadow-md" : ""
       }`}
     >
@@ -152,7 +80,7 @@ export default function Navbar() {
         <img src="/logo-job.png" alt="logo" className="w-28 h-auto" />
 
         {isMobile ? (
-          <p>test</p>
+          <DrawerProfile handleLogout={handleLogout} />
         ) : (
           <div className="flex items-center gap-20">
             <ul className="flex items-center gap-10">
@@ -205,7 +133,7 @@ export default function Navbar() {
                     />
                   </Avatar>
                 </PopoverTrigger>
-                <HandleOpenPopover
+                <PopoverProfile
                   open={open}
                   setOpen={setOpen}
                   handleLogout={handleLogout}
