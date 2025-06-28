@@ -41,12 +41,12 @@ export default function LatestJobs() {
   }, [debouncedGetData, dispatch]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto my-28">
-      <h1 className="text-3xl font-medium">
+    <div className="w-full px-5 mx-auto my-28 md:max-w-5xl">
+      <h1 className="text-xl md:text-3xl font-medium">
         <span className="text-primary">Lowongan</span> Terbaru
       </h1>
       {latestJobs.length === 0 && !loading && (
-        <p className="text-center text-xl font-medium my-5">
+        <p className="text-center text-xl font-medium mt-10 mb-5">
           Tidak ada lowongan terbaru
         </p>
       )}
@@ -58,7 +58,7 @@ export default function LatestJobs() {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-5 my-5">
+        <div className="grid grid-cols-1 gap-0 my-5 md:gap-5 md:grid-cols-2 lg:grid-cols-3">
           {latestJobs.map((data, index) => (
             <LatestJobCards key={`${data?._id}-${index}`} data={data} />
           ))}
