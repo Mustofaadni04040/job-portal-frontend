@@ -27,24 +27,22 @@ export default function CategoryCarousel() {
   };
 
   return (
-    <div>
-      <Carousel className="w-full max-w-xl mx-auto">
-        <CarouselContent>
-          {categoriesCarousel.map((category, index) => (
-            <CarouselItem key={index} className="basis-1/2 lg:basis-1/3">
-              <Button
-                onClick={() => handleSearchJobs(category)}
-                className="min-w-40 rounded-full"
-                variant="outline"
-              >
-                {category}
-              </Button>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+    <Carousel className="w-full max-w-[290px] mx-auto md:max-w-xl">
+      <CarouselContent>
+        {categoriesCarousel.map((category, index) => (
+          <CarouselItem key={index} className="basis-2/1 md:basis-1/3">
+            <Button
+              onClick={() => handleSearchJobs(category)}
+              className="min-w-40 rounded-full"
+              variant="outline"
+            >
+              {category}
+            </Button>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   );
 }
