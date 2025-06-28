@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 import { useSelector } from "react-redux";
 import useSavedJobs from "@/hooks/useSavedJobs";
+import { replaceHTMLTags } from "@/utils/replaceTags";
 
 export default function SavedJobsCard({ data }) {
   const { handleAddArchive, handleRemoveArchive } = useSavedJobs();
@@ -71,7 +72,8 @@ export default function SavedJobsCard({ data }) {
         </div>
 
         <div className="mt-3 text-sm text-slate-400">
-          {data?.description?.slice(0, 60)}...
+          {replaceHTMLTags(data?.description.slice(0, 60))}
+          ...
         </div>
       </div>
 
