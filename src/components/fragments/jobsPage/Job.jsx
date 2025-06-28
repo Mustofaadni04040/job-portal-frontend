@@ -69,7 +69,7 @@ export default function Job({ data }) {
         </div>
 
         <div className="mt-3 text-sm text-slate-400">
-          {replaceHTMLTags(data?.description.slice(0, 60))}
+          {data?.description && replaceHTMLTags(data?.description.slice(0, 60))}
           ...
         </div>
       </div>
