@@ -137,9 +137,6 @@ export default function JobDetails() {
               </>
             ) : (
               <>
-                <h1 className="text-lg font-bold mb-3">
-                  Sesuai Kemampuan Anda
-                </h1>
                 <div className="flex flex-col gap-3">
                   {simillarJobs.map((data, index) => (
                     <SimillarJobs key={index} data={data} />
