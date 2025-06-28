@@ -10,6 +10,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import convertIDR from "@/utils/currency";
 import { useSelector } from "react-redux";
+import { replaceHTMLTags } from "@/utils/replaceTags";
 
 export default function BrowseJobs({ data }) {
   const { getArchived } = useSelector((state) => state.job);
@@ -62,7 +63,8 @@ export default function BrowseJobs({ data }) {
         </div>
 
         <div className="mt-3 text-sm text-slate-400">
-          {data?.description.slice(0, 60)}...
+          {replaceHTMLTags(data?.description.slice(0, 60))}
+          ...
         </div>
       </div>
 
