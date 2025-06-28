@@ -9,8 +9,8 @@ const jobSlice = createSlice({
     applied: false,
     jobsApplied: [],
     searchQuery: "",
-    savedJobs: [],
-    getArchived: [],
+    savedJobs: [], // get all saved jobs
+    getArchived: [], // get all archived jobs id
   },
   reducers: {
     //actions
