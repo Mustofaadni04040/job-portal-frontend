@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useToast } from "./use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { useDispatch } from "react-redux";
-import { addArchivedJob, removeArchivedJob } from "@/redux/jobSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addArchivedJob,
+  removeArchivedJob,
+  setSavedJobs,
+} from "@/redux/jobSlice";
 
 export default function useSavedJobs() {
   const dispatch = useDispatch();
   const { toast } = useToast();
+  const { savedJobs } = useSelector((state) => state.job);
 
   const handleAddArchive = async (jobId) => {
     try {
@@ -42,7 +47,15 @@ export default function useSavedJobs() {
         { withCredentials: true }
       );
 
+      console.log(typeof res.data.bookmark._id);
+
       if (res.data.success) {
+        dispatch(
+          setSavedJobs(
+            savedJobs &&
+              savedJobs.filter((item) => item._id !== res.data.bookmark._id)
+          )
+        );
         dispatch(removeArchivedJob(jobId));
         toast({ title: "Success", description: res.data.message });
       }
