@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <p className="text-sm text-slate-500 text-center mb-4">
-          Copyright 2024 • All rights reserved • Seeker
+          Copyright 2025 • All rights reserved • Seeker
         </p>
       </div>
     </div>
