@@ -8,6 +8,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import useSavedJobs from "@/hooks/useSavedJobs";
+import { replaceHTMLTags } from "@/utils/replaceTags";
 
 export default function SimillarJobs({ data }) {
   const { handleAddArchive, handleRemoveArchive } = useSavedJobs();
@@ -60,7 +61,10 @@ export default function SimillarJobs({ data }) {
           <p className="flex items-center text-sm">{data?.salary}</p>
         </div>
 
-        <div className="mt-3 text-sm text-slate-400">{data?.description}</div>
+        <div className="mt-3 text-sm text-slate-400">
+          {replaceHTMLTags(data?.description.slice(0, 60))}
+          ...
+        </div>
       </div>
 
       <div className="flex items-center gap-2 mt-3">
