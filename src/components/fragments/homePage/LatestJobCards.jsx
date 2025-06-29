@@ -17,7 +17,7 @@ export default function LatestJobCards({ data }) {
   const isArchived = getArchived.includes(data?._id);
 
   return (
-    <div className="flex flex-col justify-between my-3 p-4 rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
+    <div className="flex flex-col justify-between p-4 rounded-md shadow-md bg-white border border-gray-100 hover:border-primary duration-200">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <h1 className="text-lg md:text-xl font-medium">

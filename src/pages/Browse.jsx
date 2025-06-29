@@ -77,19 +77,21 @@ export default function Browse() {
         </div>
       )}
 
-      {loading ? (
-        <div className="grid grid-cols-3 gap-5 my-5">
-          {Array.from({ length: skeletonCount }).map((_, index) => (
-            <JobSkeleton key={index} />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-3 gap-5">
-          {browseJobs.map((data, index) => (
-            <Job key={`${data?._id}-${index}`} data={data} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-3 gap-5 my-5">
+        {loading ? (
+          <>
+            {Array.from({ length: skeletonCount }).map((_, index) => (
+              <JobSkeleton key={index} />
+            ))}
+          </>
+        ) : (
+          <>
+            {browseJobs.map((data, index) => (
+              <Job key={`${data?._id}-${index}`} data={data} />
+            ))}
+          </>
+        )}
+      </div>
     </div>
   );
 }

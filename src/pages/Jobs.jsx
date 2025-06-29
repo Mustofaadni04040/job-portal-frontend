@@ -149,21 +149,23 @@ export default function Jobs() {
               </Button>
             </div>
           )}
-          {loading ? (
-            <div className="grid grid-cols-3 gap-5">
-              {Array.from({
-                length: skeletonCount,
-              }).map((_, index) => (
-                <JobSkeleton key={index} />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-3 gap-5">
-              {allJobs.map((data, index) => (
-                <Job key={index} data={data} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-3 gap-5">
+            {loading ? (
+              <>
+                {Array.from({
+                  length: skeletonCount,
+                }).map((_, index) => (
+                  <JobSkeleton key={index} />
+                ))}
+              </>
+            ) : (
+              <>
+                {allJobs.map((data, index) => (
+                  <Job key={index} data={data} />
+                ))}
+              </>
+            )}
+          </div>
 
           {!loading && isFilterEmpty(selectedFilter) && (
             <div className="w-full flex justify-center">

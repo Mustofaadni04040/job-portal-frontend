@@ -64,21 +64,23 @@ export default function SavedJobs() {
       )}
 
       <div className="max-w-5xl mx-auto my-10">
-        {loading ? (
-          <div className="grid grid-cols-3 gap-5">
-            {Array.from({
-              length: skeletonCount,
-            }).map((_, index) => (
-              <JobSkeleton key={index} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-3 gap-5">
-            {savedJobs.map((data, index) => (
-              <SavedJobsCard key={index} data={data.job} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-3 gap-5">
+          {loading ? (
+            <>
+              {Array.from({
+                length: skeletonCount,
+              }).map((_, index) => (
+                <JobSkeleton key={index} />
+              ))}
+            </>
+          ) : (
+            <>
+              {savedJobs.map((data, index) => (
+                <SavedJobsCard key={index} data={data.job} />
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </>
   );

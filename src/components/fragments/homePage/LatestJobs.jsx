@@ -51,19 +51,21 @@ export default function LatestJobs() {
         </p>
       )}
 
-      {loading ? (
-        <div className="grid grid-cols-3 gap-5 my-5">
-          {Array.from({ length: skeletonCount }).map((_, index) => (
-            <JobSkeleton key={index} />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-0 my-5 md:gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {latestJobs.map((data, index) => (
-            <LatestJobCards key={`${data?._id}-${index}`} data={data} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 my-5">
+        {loading ? (
+          <>
+            {Array.from({ length: skeletonCount }).map((_, index) => (
+              <JobSkeleton key={index} />
+            ))}
+          </>
+        ) : (
+          <>
+            {latestJobs.map((data, index) => (
+              <LatestJobCards key={`${data?._id}-${index}`} data={data} />
+            ))}
+          </>
+        )}
+      </div>
 
       {latestJobs.length > 0 && (
         <div className="w-full flex justify-center">
