@@ -40,13 +40,13 @@ export default function SavedJobs() {
     fetchSavadJobs();
   }, [debouncedGetData, dispatch]);
   return (
-    <>
+    <div className="min-h-screen px-5 md:px-0">
       <div className="max-w-7xl mx-auto mt-10">
         <Breadcrumbs textSecond="Lowongan Tersimpan" />
       </div>
 
-      {savedJobs.length === 0 && !loading && (
-        <div className="max-w-5xl mx-auto my-10">
+      <div className="max-w-5xl mx-auto my-10">
+        {savedJobs.length === 0 && !loading && (
           <div className="flex flex-col items-center">
             <img
               src="/not-found-logo.png"
@@ -60,11 +60,9 @@ export default function SavedJobs() {
               <a href={`/all-jobs`}>Lihat semua lowongan</a>
             </Button>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="max-w-5xl mx-auto my-10">
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {loading ? (
             <>
               {Array.from({
@@ -82,6 +80,6 @@ export default function SavedJobs() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
