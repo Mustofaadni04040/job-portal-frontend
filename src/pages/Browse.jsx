@@ -49,9 +49,9 @@ export default function Browse() {
   }, [debouncedGetData, dispatch, searchQuery]);
 
   return (
-    <div className="max-w-7xl mx-auto my-10 min-h-screen">
+    <div className="w-full px-5 md:max-w-7xl mx-auto my-10 min-h-screen">
       <Breadcrumbs textSecond="Pencarian" textThird={searchQuery} />
-      <h1 className="text-lg font-medium mb-5 mt-10 text-slate-600">
+      <h1 className="text-sm md:text-lg font-medium mb-5 mt-10 text-slate-600">
         Hasil pencarian untuk{" "}
         <span className="text-primary">{searchQuery}</span> (
         <span className="font-bold">{browseJobs.length}</span>)
@@ -77,7 +77,7 @@ export default function Browse() {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-5 my-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
         {loading ? (
           <>
             {Array.from({ length: skeletonCount }).map((_, index) => (

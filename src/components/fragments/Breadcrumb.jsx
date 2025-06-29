@@ -14,7 +14,10 @@ export default function Breadcrumbs({ textThird, textSecond, urlSecond }) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <Link to="/all-jobs" className="font-normal hover:text-black">
+          <Link
+            to="/all-jobs"
+            className="font-normal text-xs md:text-base hover:text-black"
+          >
             Semua Lowongan
           </Link>
         </BreadcrumbItem>
@@ -22,7 +25,7 @@ export default function Breadcrumbs({ textThird, textSecond, urlSecond }) {
           <>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage className="font-semibold">
+              <BreadcrumbPage className="font-semibold text-xs md:text-base">
                 {textSecond}
               </BreadcrumbPage>
             </BreadcrumbItem>
@@ -33,7 +36,10 @@ export default function Breadcrumbs({ textThird, textSecond, urlSecond }) {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link to={urlSecond || "#"} className="font-normal">
+                <Link
+                  to={urlSecond || "#"}
+                  className="font-normal text-xs md:text-base"
+                >
                   {textSecond}
                 </Link>
               </BreadcrumbLink>
@@ -44,7 +50,7 @@ export default function Breadcrumbs({ textThird, textSecond, urlSecond }) {
         {textThird && (
           <>
             <BreadcrumbItem>
-              <BreadcrumbPage className="font-semibold">
+              <BreadcrumbPage className="font-semibold text-xs md:text-base">
                 {textThird}
               </BreadcrumbPage>
             </BreadcrumbItem>
