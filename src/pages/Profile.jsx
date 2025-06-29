@@ -46,11 +46,11 @@ export default function Profile() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto my-10">
+      <div className="px-5 md:max-w-7xl mx-auto my-10">
         <Breadcrumbs textSecond="Profil" />
       </div>
-      <div className="relative max-w-4xl mx-auto border border-slate-200 rounded-xl my-5 p-8">
-        <div className="flex gap-5">
+      <div className="relative mx-5 md:max-w-4xl md:mx-auto border border-slate-200 rounded-xl my-5 p-8">
+        <div className="flex flex-col items-center md:flex-row md:items-start gap-5">
           <Avatar className="relative">
             <AvatarImage
               src={
@@ -63,25 +63,27 @@ export default function Profile() {
               onClick={() => setOpenModalPhoto(true)}
             />
           </Avatar>
-          <div className="flex flex-col gap-2">
-            <div>
-              <h1 className="font-medium text-xl">{user?.fullname}</h1>
-              <p className="text-sm text-slate-500 mb-1">
+          <div className="flex flex-col gap-5 md:gap-2">
+            <div className="flex flex-col gap-1">
+              <h1 className="font-medium text-base md:text-xl">
+                {user?.fullname}
+              </h1>
+              <p className="text-sm text-slate-500 mb-3 md:mb-1">
                 {user?.profile?.bio !== "undefined"
                   ? user?.profile?.bio
                   : "Update your description"}
               </p>
-              <div className="flex items-center gap-1 text-sm text-slate-500">
+              <div className="flex items-center gap-3 text-xs text-slate-500">
                 <Phone className="w-4 h-4 text-primary" />
                 {user?.email}
               </div>
-              <div className="flex items-center gap-1 text-sm text-slate-500">
+              <div className="flex items-center gap-3 text-xs text-slate-500">
                 <Mail className="w-4 h-4 text-primary" />
                 {user?.phoneNumber}
               </div>
             </div>
             <div>
-              <h1 className="font-medium">Kemampuan</h1>
+              <h1 className="font-medium mb-2">Kemampuan</h1>
               <div className="flex items-center gap-2 flex-wrap">
                 {user?.profile?.skills?.length === 0 ? (
                   <span className="text-sm text-slate-500">
@@ -91,7 +93,7 @@ export default function Profile() {
                   user?.profile?.skills?.map((skill, index) => (
                     <p
                       key={index}
-                      className="mt-1 border border-primary bg-primary bg-opacity-20 py-1 px-5 rounded-full text-primary font-medium"
+                      className="border border-primary bg-primary bg-opacity-20 py-1 px-3 rounded-full text-primary font-medium text-xs md:text-base md:px-5"
                     >
                       {skill}
                     </p>
@@ -107,7 +109,7 @@ export default function Profile() {
                   <a
                     target="blank"
                     href={user?.profile?.resume}
-                    className="w-fit flex items-center gap-3 bg-orange-500 shadow-md py-1 px-5 rounded-full text-white font-medium text-sm"
+                    className="w-fit flex items-center gap-1 md:gap-3 bg-orange-500 shadow-md py-1 px-3 md:px-5 rounded-full text-white font-medium text-xs md:text-base"
                   >
                     <File className="w-5 h-5" />
                     {user?.profile?.resumeOriginalName}
@@ -140,7 +142,7 @@ export default function Profile() {
           </Button>
         </div>
         <div className="max-w-4xl mx-auto bg-white rounded-xl mt-10">
-          <h1 className="text-xl font-medium mb-3">
+          <h1 className="text-base md:text-xl font-medium mb-3">
             Lamaran Saya ({jobsApplied?.length})
           </h1>
           <AppliedJobTable />

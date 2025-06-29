@@ -17,10 +17,12 @@ export default function AppliedJobTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Tanggal</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Perusahaan</TableHead>
-            <TableHead className="text-right">Status</TableHead>
+            <TableHead className="text-xs md:text-base">Tanggal</TableHead>
+            <TableHead className="text-xs md:text-base">Role</TableHead>
+            <TableHead className="text-xs md:text-base">Perusahaan</TableHead>
+            <TableHead className="text-right text-xs md:text-base">
+              Status
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -33,11 +35,11 @@ export default function AppliedJobTable() {
           ) : (
             jobsApplied.map((jobApplied, index) => (
               <TableRow key={index}>
-                <TableCell className="font-medium">
+                <TableCell className="font-medium text-xs md:text-base">
                   {jobApplied?.createdAt?.split("T")[0]}
                 </TableCell>
                 <TableCell>{jobApplied?.job?.title}</TableCell>
-                <TableCell className="flex items-center gap-1">
+                <TableCell className="flex items-center gap-1 text-xs md:text-base">
                   <Avatar>
                     <AvatarImage
                       src={jobApplied?.job?.company?.logo}
@@ -45,7 +47,7 @@ export default function AppliedJobTable() {
                   </Avatar>
                   PT. {jobApplied?.job?.company?.name}
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right text-xs md:text-base">
                   <span
                     className={`py-1 px-3 rounded-full text-white font-bold ${
                       jobApplied?.status === "accepted"
