@@ -23,39 +23,43 @@ export default function JobDetailsDescription({
   const isArchived = getArchived.includes(detailJob?._id);
 
   return (
-    <div className="min-h-[1000px] border border-slate-200 rounded-xl">
+    <div className="min-h-[1000px] relative border border-slate-200 rounded-xl">
       <div className="flex justify-between m-8">
-        <div className="flex gap-3">
-          <Avatar className="border border-slate-200 p-2 rounded-full w-20 h-20">
+        <div className="flex flex-col md:flex-row gap-3">
+          <Avatar className="border border-slate-200 p-2 rounded-full w-16 h-16 md:w-20 md:h-20">
             <AvatarImage src={detailJob?.company?.logo} alt="company-icon" />
           </Avatar>
           <div className="flex flex-col">
-            <h1 className="text-xl font-medium">{detailJob?.title}</h1>
-            <div className="flex items-center gap-1">
-              <p className="text-md text-primary font-medium">
+            <h1 className="text-base md:text-xl font-medium">
+              {detailJob?.title}
+            </h1>
+            <div className="flex items-center gap-1 mb-2">
+              <p className="text-sm md:text-md text-primary font-medium">
                 PT. {detailJob?.company?.name}
               </p>
               <img src={verifiedIcon} alt="verfied-icon" className="w-4 h-4" />
             </div>
             <div className="flex items-center gap-1">
               <img src={locationIcon} alt="location-icon" className="w-4 h-4" />
-              <p className="text-sm text-slate-700">{detailJob?.location}</p>
+              <p className="text-xs md:text-sm text-slate-700">
+                {detailJob?.location}
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <img src={peopleIcon} alt="people-icon" className="w-4 h-4" />
-              <p className="flex items-center text-sm text-slate-700">
+              <p className="flex items-center text-xs md:text-sm text-slate-700">
                 {detailJob?.jobType} <Dot /> {detailJob?.position} Posisi
               </p>
             </div>
             <div className="flex items-center gap-1">
               <img src={moneyIcon} alt="money-icon" className="w-4 h-4" />
-              <p className="text-sm text-slate-700">
+              <p className="text-xs md:text-sm text-slate-700">
                 {convertIDR(detailJob?.salary)}
               </p>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 mt-1 md:mt-0">
               <FileUser alt="applications-icon" className="w-4 h-4" />
-              <p className="text-sm text-slate-700">
+              <p className="text-xs md:text-sm text-slate-700">
                 {totalApplicants > 0
                   ? `${totalApplicants} pelamar`
                   : "Belum ada pelamar"}
@@ -66,7 +70,7 @@ export default function JobDetailsDescription({
               <Button
                 onClick={applied ? null : handleApplyJob}
                 disabled={applied}
-                className={`rounded-full py-1 px-10 ${
+                className={`rounded-full py-1 px-5 md:px-10 ${
                   applied ? "bg-primary" : "bg-primary hover:bg-[#e7407d]"
                 }`}
               >
@@ -92,19 +96,22 @@ export default function JobDetailsDescription({
             </div>
           </div>
         </div>
-
-        <p className="h-fit text-xs text-slate-900 bg-green-500 bg-opacity-30 py-1 px-3 rounded-md">
-          {timeAgo(detailJob?.createdAt)}
-        </p>
       </div>
+      <p className="absolute top-5 right-5 h-fit w-fit text-xs text-slate-900 bg-green-500 bg-opacity-30 py-1 px-3 rounded-md">
+        {timeAgo(detailJob?.createdAt)}
+      </p>
       <hr className="w-full" />
       <div className="m-8">
         <div>
-          <h3 className="text-lg font-bold mb-2">Kebutuhan Pekerjaan</h3>
+          <h3 className="text-base md:text-lg font-bold mb-2">
+            Kebutuhan Pekerjaan
+          </h3>
 
           <div className="flex flex-col gap-3 my-3">
-            <p>Pengalaman : {detailJob?.experienceLevel} Tahun</p>
-            <div className="flex items-center gap-2">
+            <p className="text-sm md:text-base">
+              Pengalaman : {detailJob?.experienceLevel} Tahun
+            </p>
+            <div className="flex flex-col items-start md:flex-row md:items-center text-sm md:text-base gap-2">
               Skill Dibutuhkan :{" "}
               {detailJob?.requirements[0] === "No requirements needed" ? (
                 <span className="border border-primary border-opacity-50 px-5 rounded-full">
@@ -126,8 +133,10 @@ export default function JobDetailsDescription({
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-bold mb-2">Deskripsi Pekerjaan</h3>
-          <div className="description-content text-sm font-normal">
+          <h3 className="textbase md:text-lg font-bold mb-2">
+            Deskripsi Pekerjaan
+          </h3>
+          <div className="description-content text-sm md:text-base font-normal">
             {detailJob?.description && HTMLReactParser(detailJob?.description)}
           </div>
         </div>

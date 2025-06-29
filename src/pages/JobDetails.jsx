@@ -91,14 +91,14 @@ export default function JobDetails() {
   }, [allJobs, user?.profile?.skills]);
 
   return (
-    <div className="max-w-7xl mx-auto mb-10">
+    <div className="w-full px-5 md:max-w-7xl mx-auto mb-10">
       <div className="my-10">
         <Breadcrumbs
           textSecond="Detail Lowongan"
           textThird={detailJob?.title}
         />
       </div>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 gap-y-5 md:grid-cols-3 md:gap-x-5 md:gap-y-0">
         <div className="col-span-2">
           <JobDetailsDescription
             detailJob={detailJob}
@@ -109,7 +109,9 @@ export default function JobDetails() {
           />
         </div>
         <div className="col-span-1 bg-slate-50 border border-slate-200 p-5 rounded-xl">
-          <h1 className="text-lg font-bold mb-3">Sesuai Kemampuan Anda</h1>
+          <h1 className="text-sm md:text-lg font-bold mb-5 md:mb-3">
+            Sesuai Kemampuan Anda
+          </h1>
           {!user && (
             <>
               <img
