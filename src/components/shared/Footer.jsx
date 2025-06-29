@@ -21,28 +21,32 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-medium md:mb-2">About Seeker</h2>
-            <div className="text-slate-500">
+            <h2 className="text-base md:text-lg font-medium md:mb-2">
+              About Seeker
+            </h2>
+            <div className="text-slate-500 text-sm md:text-base">
               <Link to="/" className="hover:text-primary">
                 Beranda
               </Link>
             </div>
-            <div className="text-slate-500">
+            <div className="text-slate-500 text-sm md:text-base">
               <Link to="/all-jobs" className="hover:text-primary">
                 Daftar Lowongan
               </Link>
             </div>
           </div>
           <div>
-            <h2 className="text-lg font-medium mb-2 mt-5 md:mt-0">Call Us</h2>
-            <div className="text-slate-500">
+            <h2 className="text-base md:text-lg font-medium mb-2 mt-5 md:mt-0">
+              Call Us
+            </h2>
+            <div className="text-slate-500 text-sm md:text-base">
               Jl. Menteng Raya No.62, RT.3/RW.9, Kb. Sirih, Kec. Menteng, Kota
               Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10340
             </div>
           </div>
         </div>
 
-        <p className="text-sm text-slate-500 text-center mb-4">
+        <p className="text-center mb-4 text-slate-500 text-sm md:text-base">
           Copyright 2025 • All rights reserved • Seeker
         </p>
       </div>
