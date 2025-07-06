@@ -115,10 +115,10 @@ export default function Jobs() {
 
   return (
     <div className="mb-10">
-      <div className="max-w-7xl mx-auto my-10">
+      <div className="w-full px-5 md:max-w-7xl mx-auto my-10">
         <Breadcrumbs />
       </div>
-      <div className="max-w-5xl mx-auto">
+      <div className="w-full px-5 md:max-w-5xl mx-auto">
         <div className="flex flex-col gap-5">
           <div>
             <FilterJobs
@@ -149,7 +149,7 @@ export default function Jobs() {
               </Button>
             </div>
           )}
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 ld:grid-cols-3 gap-5">
             {loading ? (
               <>
                 {Array.from({
@@ -170,7 +170,7 @@ export default function Jobs() {
           {!loading && isFilterEmpty(selectedFilter) && (
             <div className="w-full flex justify-center">
               <Button
-                className="rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
+                className="text-xs md:text-sm rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
                 onClick={() =>
                   limit < totalJobs ? setLimit(limit + 6) : setLimit(limit - 6)
                 }
