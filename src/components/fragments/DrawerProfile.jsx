@@ -57,17 +57,27 @@ export default function DrawerProfile({ handleLogout }) {
         </DrawerTitle>
         <DrawerDescription className="flex flex-col pl-5 py-5 gap-2">
           {(user && user?.role === "job-seeker") || user === null ? (
-            NavUrl.map((item, index) => (
-              <DrawerClose asChild key={index} className="text-left">
+            <>
+              {NavUrl.map((item, index) => (
+                <DrawerClose asChild key={index} className="text-left">
+                  <a
+                    key={index}
+                    href={item.url}
+                    className={`${pathname === item.url && "text-primary"}`}
+                  >
+                    {item.title}
+                  </a>
+                </DrawerClose>
+              ))}
+              <DrawerClose asChild className="text-left">
                 <a
-                  key={index}
-                  href={item.url}
-                  className={`${pathname === item.url && "text-primary"}`}
+                  href="/jobs/saved"
+                  className={`${pathname === "/jobs/saved" && "text-primary"}`}
                 >
-                  {item.title}
+                  Tersimpan
                 </a>
               </DrawerClose>
-            ))
+            </>
           ) : (
             <>
               <DrawerClose asChild className="text-left">

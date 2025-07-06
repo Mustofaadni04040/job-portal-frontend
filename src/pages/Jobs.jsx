@@ -1,8 +1,11 @@
+import Search from "@/components/elements/Search";
 import Breadcrumbs from "@/components/fragments/Breadcrumb";
+import DrawerFilter from "@/components/fragments/DrawerFilter";
 import JobSkeleton from "@/components/fragments/JobSkeleton";
 import FilterJobs from "@/components/fragments/jobsPage/FilterJobs";
 import Job from "@/components/fragments/jobsPage/Job";
 import { Button } from "@/components/ui/button";
+import useMobile from "@/hooks/useMobile";
 import { setAllJobs, setGetArchived } from "@/redux/jobSlice";
 import { isFilterEmpty } from "@/utils/emptyFilter";
 import { getData } from "@/utils/fetch";
@@ -29,6 +32,7 @@ export default function Jobs() {
   const dispatch = useDispatch();
   const debouncedGetData = useMemo(() => debounce(getData, 1000), []);
   const navigate = useNavigate();
+  const isMobile = useMobile();
 
   const updateSearchParams = useCallback(() => {
     const params = new URLSearchParams();
@@ -76,8 +80,6 @@ export default function Jobs() {
           true
         );
 
-        console.log(res);
-
         if (res.data.success) {
           setSkeletonCount(res?.data?.jobs?.length);
           setTotalJobs(res?.data?.total);
@@ -113,6 +115,10 @@ export default function Jobs() {
     setSearchLocation("");
   };
 
+  const handleApplyMobileFilter = () => {
+    updateSearchParams();
+  };
+
   return (
     <div className="mb-10">
       <div className="w-full px-5 md:max-w-7xl mx-auto my-10">
@@ -120,7 +126,22 @@ export default function Jobs() {
       </div>
       <div className="w-full px-5 md:max-w-5xl mx-auto">
         <div className="flex flex-col gap-5">
-          <div>
+          {isMobile ? (
+            <div className="grid grid-cols-6 gap-1">
+              <Search
+                classname="col-span-5"
+                setInput={setInput}
+                placeholder="Cari pekejeraan impianmu disini..."
+                id="search-job"
+              />
+              <DrawerFilter
+                selectedFilter={selectedFilter}
+                setSelectedFilter={setSelectedFilter}
+                handleApplyMobileFilter={handleApplyMobileFilter}
+                handleResetFilter={handleResetFilter}
+              />
+            </div>
+          ) : (
             <FilterJobs
               handleResetFilter={handleResetFilter}
               setSortFilterJobs={setSortFilterJobs}
@@ -129,7 +150,7 @@ export default function Jobs() {
               setSearchLocation={setSearchLocation}
               setInput={setInput}
             />
-          </div>
+          )}
           {allJobs.length === 0 && (
             <div className="flex flex-col items-center">
               <img
@@ -149,7 +170,7 @@ export default function Jobs() {
               </Button>
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 ld:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {loading ? (
               <>
                 {Array.from({
@@ -167,7 +188,7 @@ export default function Jobs() {
             )}
           </div>
 
-          {!loading && isFilterEmpty(selectedFilter) && (
+          {!loading && isFilterEmpty(selectedFilter) && input.length === 0 && (
             <div className="w-full flex justify-center">
               <Button
                 className="text-xs md:text-sm rounded-full bg-primary bg-opacity-10 shadow-sm font-bold text-primary hover:bg-primary hover:bg-opacity-10"
