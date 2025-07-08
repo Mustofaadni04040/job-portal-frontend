@@ -25,8 +25,8 @@ export default function DrawerProfile({ handleLogout }) {
         <AlignRight className="cursor-pointer" />
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerTitle className="text-left pl-5 pt-12">
-          {user ? (
+        {user ? (
+          <DrawerTitle className="text-left pl-5 pt-12">
             <div className="flex gap-3">
               <Avatar>
                 <AvatarImage
@@ -44,16 +44,18 @@ export default function DrawerProfile({ handleLogout }) {
                   <h4 className="font-medium">{user?.fullname}</h4>
                   <p className="text-xs text-slate-500">{user?.profile?.bio}</p>
                   <DrawerClose className="text-left" asChild>
-                    <Link to={"/profile"} className="text-primary text-xs mt-3">
+                    <Link to={"/profile"} className="text-primary text-xs mt-2">
                       Lihat halaman profil
                     </Link>
                   </DrawerClose>
                 </div>
               )}
             </div>
-          ) : null}
-        </DrawerTitle>
-        <DrawerDescription className="flex flex-col pl-5 py-5 gap-4">
+          </DrawerTitle>
+        ) : (
+          <DrawerTitle className="sr-only" />
+        )}
+        <DrawerDescription className="flex flex-col pl-5 py-5 gap-3">
           {(user && user?.role === "job-seeker") || user === null ? (
             <>
               {NavUrl.map((item, index) => (

@@ -40,7 +40,7 @@ export default function SavedJobs() {
     fetchSavadJobs();
   }, [debouncedGetData, dispatch]);
   return (
-    <div className="min-h-screen px-5 md:px-0">
+    <div className="min-h-screen px-5 lg:px-0">
       <div className="max-w-7xl mx-auto mt-10">
         <Breadcrumbs textSecond="Lowongan Tersimpan" />
       </div>

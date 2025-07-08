@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <div className="w-full border-t border-slate-200">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full justify-between px-5 md:px-0 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full justify-between px-5 lg:px-0 py-10">
           <div className="max-w-96 mb-7">
             <img src="/logo-job.png" alt="logo" className="w-28 h-auto" />
             <p className="mt-3 text-sm text-slate-500">

@@ -76,7 +76,7 @@ export default function Navbar() {
         isSticky ? "shadow-md" : ""
       }`}
     >
-      <div className="flex items-center justify-between px-5 mx-auto h-16 text-[#373C45] md:max-w-7xl lg:p-0">
+      <div className="flex items-center justify-between px-5 mx-auto h-16 text-[#373C45] md:max-w-7xl">
         <img src="/logo-job.png" alt="logo" className="w-28 h-auto" />
 
         {isMobile ? (

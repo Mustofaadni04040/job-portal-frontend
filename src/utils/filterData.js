@@ -17,7 +17,7 @@ export const filterData = [
     filterValue: [{ min: 0, max: 50000000 }],
   },
   {
-    filterTitle: "Tipe Pekerjaan",
+    filterTitle: "Tipe",
     filterType: "Job Type",
     filterValue: ["Full Time", "Part Time", "Internship", "Freelance"],
   },
