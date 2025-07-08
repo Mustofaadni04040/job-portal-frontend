@@ -16,7 +16,6 @@ export default function Login() {
   const [input, setInput] = useState({
     email: "",
     password: "",
-    // role: "",
   });
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -72,12 +71,12 @@ export default function Login() {
     <div className="flex items-center justify-center max-w-7xl h-screen mx-auto text-[#373C45]">
       <form
         onSubmit={handleSubmit}
-        className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
+        className="w-full max-w-md border border-gray-200 rounded-md p-4 mx-5 my-10"
       >
         <div className="w-full flex justify-center mb-5">
           <img src="./logo-job.png" alt="job-logo" className="w-40" />
         </div>
-        <h1 className="font-bold text-xl mb-5">Sign In</h1>
+        <h1 className="font-bold text-xl text-slate-600 mb-5">Masuk</h1>
         <div className="my-4">
           <Label className="flex flex-col gap-2">
             Email
@@ -86,7 +85,7 @@ export default function Login() {
               value={input.email}
               name="email"
               onChange={handleChangeInput}
-              placeholder="Enter your email"
+              placeholder="example@gmail.com"
               required
             />
           </Label>
@@ -99,52 +98,11 @@ export default function Login() {
               value={input.password}
               name="password"
               onChange={handleChangeInput}
-              placeholder="Enter your password"
+              placeholder="***********"
               required
             />
           </Label>
         </div>
-
-        {/* <div className="flex items-center justify-between">
-          <RadioGroup className="flex items-center gap-5 my-3">
-            <div className="flex items-center space-x-2">
-              <Label
-                htmlFor="job-seeker"
-                className="flex items-center gap-2 flex-row-reverse cursor-pointer"
-              >
-                Job Seeker
-                <Input
-                  id="job-seeker"
-                  type="radio"
-                  name="role"
-                  value="job-seeker"
-                  checked={input.role === "job-seeker"}
-                  onChange={handleChangeInput}
-                  className="cursor-pointer w-3 h-3"
-                  required
-                />
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Label
-                htmlFor="recruiter"
-                className="flex items-center gap-2 flex-row-reverse cursor-pointer"
-              >
-                Recruiter
-                <Input
-                  id="recruiter"
-                  type="radio"
-                  name="role"
-                  value="recruiter"
-                  checked={input.role === "recruiter"}
-                  onChange={handleChangeInput}
-                  className="cursor-pointer w-3 h-3"
-                  required
-                />
-              </Label>
-            </div>
-          </RadioGroup>
-        </div> */}
 
         <Button
           type="submit"
@@ -154,13 +112,13 @@ export default function Login() {
           {loading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            "Sign in"
+            "Masuk"
           )}
         </Button>
         <p className="text-sm text-center">
           Tidak punya akun?,{" "}
           <span className="text-primary">
-            <Link to={"/sign-up"}>Sign up</Link>
+            <Link to={"/sign-up"}>Daftar</Link>
           </span>{" "}
           disini
         </p>
