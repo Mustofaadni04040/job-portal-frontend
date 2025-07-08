@@ -43,18 +43,20 @@ export default function DrawerFilter({
 
       <DrawerContent>
         <div className="max-h-96 overflow-y-auto">
-          <DrawerTitle className="text-left pl-5 pt-10 text-lg font-bold">
+          <DrawerTitle className="text-left pl-5 pt-5 text-lg font-bold">
             Filter
           </DrawerTitle>
 
           <DrawerDescription className="sr-only">
-            Just for fixed shadcn warning
+            Just for fixed shadcn descriptionwarning
           </DrawerDescription>
 
           <div className="flex flex-col px-5 py-3 gap-4">
             {filterData.map((data, index) => (
               <div key={index} className="border-b pb-4">
-                <h4 className="font-bold mb-4">{data.filterTitle}</h4>
+                <h4 className="font-bold mb-4 text-sm text-slate-700">
+                  {data.filterTitle}
+                </h4>
 
                 <div
                   className={`grid ${
@@ -97,7 +99,10 @@ export default function DrawerFilter({
                             }
                           />
                         )}
-                        <Label htmlFor={index} className="text-sm font-normal">
+                        <Label
+                          htmlFor={`${data.filterType}-${index}`}
+                          className="text-sm font-normal"
+                        >
                           {data.filterType === "Salary"
                             ? convertIDR(
                                 selectedFilterMobile?.Salary?.length === 1
@@ -128,7 +133,7 @@ export default function DrawerFilter({
               </Button>
             </DrawerClose>
             <DrawerClose asChild>
-              <Button variant="ghost" onClick={handleResetFilter}>
+              <Button variant="outline" onClick={handleResetFilter}>
                 Reset
               </Button>
             </DrawerClose>

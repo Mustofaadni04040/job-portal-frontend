@@ -116,7 +116,7 @@ export default function FilterJobs({
                         ) : (
                           <input
                             value={value} // optional: karena sudah diatur di onChange
-                            id={index}
+                            id={`${data.filterType}-${index}`}
                             type="checkbox"
                             checked={selectedFilter[data.filterType]?.includes(
                               value
@@ -138,7 +138,10 @@ export default function FilterJobs({
                           />
                         )}
 
-                        <Label htmlFor={index} className="text-sm font-normal">
+                        <Label
+                          htmlFor={`${data.filterType}-${index}`}
+                          className="text-sm font-normal"
+                        >
                           {data.filterType === "Salary"
                             ? convertIDR(
                                 selectedFilter?.Salary?.length === 1
