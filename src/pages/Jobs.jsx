@@ -26,6 +26,12 @@ export default function Jobs() {
     "Job Type": [],
     "Experience Level": [],
   });
+  const [selectedFilterMobile, setSelectedFilterMobile] = useState({
+    Salary: [],
+    Location: [],
+    "Job Type": [],
+    "Experience Level": [],
+  });
   const [limit, setLimit] = useState(6);
   const [totalJobs, setTotalJobs] = useState(0);
   const [searchLocation, setSearchLocation] = useState("");
@@ -105,8 +111,18 @@ export default function Jobs() {
     updateSearchParams,
   ]);
 
+  const handleApplyFilterMobile = () => {
+    setSelectedFilter(selectedFilterMobile);
+  };
+
   const handleResetFilter = () => {
     setSelectedFilter({
+      Location: [],
+      Salary: [],
+      "Job Type": [],
+      "Experience Level": [],
+    });
+    setSelectedFilterMobile({
       Location: [],
       Salary: [],
       "Job Type": [],
@@ -131,11 +147,10 @@ export default function Jobs() {
                 id="search-job"
               />
               <DrawerFilter
-                selectedFilter={selectedFilter}
-                setSelectedFilter={setSelectedFilter}
                 handleResetFilter={handleResetFilter}
-                setSkeletonCount={setSkeletonCount}
-                updateSearchParams={updateSearchParams}
+                handleApplyFilterMobile={handleApplyFilterMobile}
+                setSelectedFilterMobile={setSelectedFilterMobile}
+                selectedFilterMobile={selectedFilterMobile}
               />
             </div>
           ) : (
