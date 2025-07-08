@@ -13,6 +13,7 @@ import { Slider } from "@/components/ui/slider";
 import { filterData } from "@/utils/filterData";
 import { Label } from "@/components/ui/label";
 import PropTypes from "prop-types";
+import convertIDR from "@/utils/currency";
 
 export default function DrawerFilter({
   handleApplyFilterMobile,
@@ -76,10 +77,10 @@ export default function DrawerFilter({
                             defaultValue={[value.max]}
                             max={value.max}
                             step={1000000}
-                            onValueChange={(val) => {
+                            onValueChange={(e) => {
                               setSelectedFilterMobile((prev) => ({
                                 ...prev,
-                                [data.filterType]: [{ min: 0, max: val }],
+                                [data.filterType]: [{ min: 0, max: e }],
                               }));
                             }}
                           />
@@ -96,12 +97,15 @@ export default function DrawerFilter({
                             }
                           />
                         )}
-                        <Label
-                          htmlFor={`${data.filterType}-${index}`}
-                          className="text-sm font-medium"
-                        >
+                        <Label htmlFor={index} className="text-sm font-normal">
                           {data.filterType === "Salary"
-                            ? `Rp. ${value.max.toLocaleString("id-ID")}`
+                            ? convertIDR(
+                                selectedFilterMobile?.Salary?.length === 1
+                                  ? selectedFilterMobile?.Salary?.map(
+                                      (item) => item.max
+                                    )
+                                  : value.max
+                              )
                             : data.filterType === "Experience Level"
                             ? `${value} Tahun`
                             : value}
