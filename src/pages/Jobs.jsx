@@ -115,10 +115,6 @@ export default function Jobs() {
     setSearchLocation("");
   };
 
-  const handleApplyMobileFilter = () => {
-    updateSearchParams();
-  };
-
   return (
     <div className="mb-10">
       <div className="w-full px-5 md:max-w-7xl mx-auto my-10">
@@ -137,8 +133,9 @@ export default function Jobs() {
               <DrawerFilter
                 selectedFilter={selectedFilter}
                 setSelectedFilter={setSelectedFilter}
-                handleApplyMobileFilter={handleApplyMobileFilter}
                 handleResetFilter={handleResetFilter}
+                setSkeletonCount={setSkeletonCount}
+                updateSearchParams={updateSearchParams}
               />
             </div>
           ) : (
@@ -156,9 +153,9 @@ export default function Jobs() {
               <img
                 src="/not-found-logo.png"
                 alt="not-found-logo"
-                className="w-96 h-96"
+                className="w-80 h-80 md:w-96 md:h-96"
               />
-              <p className="text-center text-xl">
+              <p className="text-center text-sm md:text-base lg:text-xl">
                 Maaf, pekerjaan yang kamu cari belum ada nih 🙏😊
               </p>
               <Button
