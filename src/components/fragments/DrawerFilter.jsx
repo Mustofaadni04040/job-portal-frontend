@@ -37,7 +37,7 @@ export default function DrawerFilter({
       <DrawerTrigger asChild>
         <AlignHorizontalDistributeCenter
           strokeWidth={1.5}
-          className="border border-slate-300 shadow-md rounded-md cursor-pointer p-2 h-full w-auto place-self-end text-primary"
+          className="border border-slate-300 shadow-sm rounded-md cursor-pointer p-2 h-full w-auto place-self-end text-primary"
         />
       </DrawerTrigger>
 
@@ -48,7 +48,7 @@ export default function DrawerFilter({
           </DrawerTitle>
 
           <DrawerDescription className="sr-only">
-            Just for fixed shadcn descriptionwarning
+            Just for fixed shadcn description warning
           </DrawerDescription>
 
           <div className="flex flex-col px-5 py-3 gap-4">

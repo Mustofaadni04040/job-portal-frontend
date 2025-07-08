@@ -42,9 +42,7 @@ export default function DrawerProfile({ handleLogout }) {
               {user?.role === "job-seeker" && (
                 <div className="flex flex-col gap-1">
                   <h4 className="font-medium">{user?.fullname}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {user?.profile?.bio}
-                  </p>
+                  <p className="text-xs text-slate-500">{user?.profile?.bio}</p>
                   <DrawerClose className="text-left" asChild>
                     <Link to={"/profile"} className="text-primary text-xs mt-3">
                       Lihat halaman profil
@@ -55,7 +53,7 @@ export default function DrawerProfile({ handleLogout }) {
             </div>
           ) : null}
         </DrawerTitle>
-        <DrawerDescription className="flex flex-col pl-5 py-5 gap-2">
+        <DrawerDescription className="flex flex-col pl-5 py-5 gap-4">
           {(user && user?.role === "job-seeker") || user === null ? (
             <>
               {NavUrl.map((item, index) => (

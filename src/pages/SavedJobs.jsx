@@ -51,9 +51,9 @@ export default function SavedJobs() {
             <img
               src="/not-found-logo.png"
               alt="not-found-logo"
-              className="w-96 h-96"
+              className="w-80 h-80 md:w-96 md:h-96"
             />
-            <p className="text-center text-xl">
+            <p className="text-center text-sm md:text-base lg:text-xl">
               Belum ada lowongan yang kamu simpan nih!
             </p>
             <Button className="bg-primary hover:bg-[#e7407d] mt-5">

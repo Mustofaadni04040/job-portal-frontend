@@ -139,9 +139,10 @@ export default function Jobs() {
       <div className="w-full px-5 md:max-w-5xl mx-auto">
         <div className="flex flex-col gap-5">
           {isMobile ? (
-            <div className="grid grid-cols-6 gap-1">
+            <div className="grid grid-cols-6">
               <Search
                 classname="col-span-5"
+                classnameIcon="w-5 h-5"
                 setInput={setInput}
                 placeholder="Cari pekejeraan impianmu disini..."
                 id="search-job"
