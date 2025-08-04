@@ -86,7 +86,7 @@ export default function Browse() {
           </>
         ) : (
           <>
-            {browseJobs.map((data, index) => (
+            {browseJobs?.map((data, index) => (
               <Job key={`${data?._id}-${index}`} data={data} />
             ))}
           </>

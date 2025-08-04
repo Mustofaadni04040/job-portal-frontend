@@ -28,9 +28,9 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
 
     try {
-      dispatch(setLoading(true));
       const res = await axios.post(
         `${import.meta.env.VITE_USER_API_END_POINT}/login`,
         input,

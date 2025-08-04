@@ -33,6 +33,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
     const formData = new FormData();
     formData.append("fullname", input.fullname);
     formData.append("email", input.email);
@@ -45,7 +46,6 @@ export default function Register() {
     }
 
     try {
-      dispatch(setLoading(true));
       const res = await axios.post(
         `${import.meta.env.VITE_USER_API_END_POINT}/register`,
         formData,
