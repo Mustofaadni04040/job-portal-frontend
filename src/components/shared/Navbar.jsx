@@ -29,8 +29,9 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(
+      const res = await axios.post(
         `${import.meta.env.VITE_USER_API_END_POINT}/logout`,
+        {},
         { withCredentials: true }
       );
 
