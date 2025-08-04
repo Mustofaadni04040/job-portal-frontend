@@ -14,6 +14,7 @@ import useMobile from "@/hooks/useMobile";
 import { PopoverProfile } from "../PopoverProfile";
 import { NavUrl } from "@/utils/navUrl";
 import DrawerProfile from "../fragments/DrawerProfile";
+import { persister } from "@/main";
 
 const disabledNavbar = ["sign-in", "sign-up"];
 export default function Navbar() {
@@ -39,6 +40,7 @@ export default function Navbar() {
         dispatch(setUser(null));
         dispatch(setToken(null));
         dispatch(setSavedJobs([]));
+        persister.purge();
         navigate("/");
         dispatch(setGetArchived([]));
         toast({
