@@ -35,7 +35,6 @@ export default function Navbar() {
       );
 
       if (res.data.success) {
-        Cookies.remove("token");
         Cookies.remove("user");
         dispatch(setUser(null));
         dispatch(setSavedJobs([]));
