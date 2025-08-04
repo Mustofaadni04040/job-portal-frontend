@@ -45,7 +45,7 @@ export default function LatestJobs() {
       <h1 className="text-xl md:text-3xl font-medium">
         <span className="text-primary">Lowongan</span> Terbaru
       </h1>
-      {latestJobs.length === 0 && !loading && (
+      {latestJobs?.length === 0 && !loading && (
         <p className="text-center text-xl font-medium mt-10 mb-5">
           Tidak ada lowongan terbaru
         </p>

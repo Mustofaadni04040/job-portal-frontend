@@ -77,7 +77,7 @@ export default function JobDetails() {
 
   useEffect(() => {
     const filterSimillarJobs = () => {
-      const simillar = allJobs.filter((job) =>
+      const simillar = allJobs?.filter((job) =>
         job?.requirements?.some((requirement) =>
           user?.profile?.skills?.some(
             (skill) =>
@@ -126,7 +126,7 @@ export default function JobDetails() {
             </>
           )}
           {user &&
-            (simillarJobs.length === 0 ? (
+            (simillarJobs?.length === 0 ? (
               <>
                 <img
                   src="/not-found-logo.png"
@@ -140,7 +140,7 @@ export default function JobDetails() {
             ) : (
               <>
                 <div className="flex flex-col gap-3">
-                  {simillarJobs.map((data, index) => (
+                  {simillarJobs?.map((data, index) => (
                     <SimillarJobs key={index} data={data} />
                   ))}
                 </div>

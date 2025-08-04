@@ -46,7 +46,7 @@ export default function SavedJobs() {
       </div>
 
       <div className="max-w-5xl mx-auto my-10">
-        {savedJobs.length === 0 && !loading && (
+        {savedJobs?.length === 0 && !loading && (
           <div className="flex flex-col items-center">
             <img
               src="/not-found-logo.png"

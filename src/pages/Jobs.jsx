@@ -164,7 +164,7 @@ export default function Jobs() {
               setInput={setInput}
             />
           )}
-          {allJobs.length === 0 && (
+          {allJobs?.length === 0 && !loading && (
             <div className="flex flex-col items-center">
               <img
                 src="/not-found-logo.png"
@@ -194,7 +194,7 @@ export default function Jobs() {
               </>
             ) : (
               <>
-                {allJobs.map((data, index) => (
+                {allJobs?.map((data, index) => (
                   <Job key={index} data={data} />
                 ))}
               </>

@@ -29,7 +29,7 @@ export default function CategoryCarousel() {
   return (
     <Carousel className="w-full max-w-[230px] mx-auto md:max-w-xl">
       <CarouselContent>
-        {categoriesCarousel.map((category, index) => (
+        {categoriesCarousel?.map((category, index) => (
           <CarouselItem key={index} className="basis-2/1 md:basis-1/3">
             <Button
               onClick={() => handleSearchJobs(category)}

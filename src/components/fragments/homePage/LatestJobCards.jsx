@@ -21,7 +21,7 @@ export default function LatestJobCards({ data }) {
       <div className="flex justify-between">
         <div className="flex flex-col">
           <h1 className="text-lg md:text-xl font-medium">
-            {data?.title.slice(0, 22)}
+            {data?.title?.slice(0, 22)}
             {data?.title?.length > 22 && "..."}
           </h1>
           <div className="flex items-center gap-2">
