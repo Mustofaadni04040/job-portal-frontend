@@ -8,7 +8,7 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "../ui/toast";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setToken, setUser } from "@/redux/authSlice";
+import { setLoading, setUser } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 import Cookies from "js-cookie";
 
@@ -44,10 +44,10 @@ export default function Login() {
       console.log(res);
 
       if (res.data.success) {
-        const token = Cookies.get("token");
-        Cookies.set("token", token); // simpan token ke cookies
+        // const token = Cookies.get("token");
+        // Cookies.set("token", token); // simpan token ke cookies
         Cookies.set("user", JSON.stringify(res.data.user));
-        dispatch(setToken(token));
+        // dispatch(setToken(token));
         dispatch(setUser(res.data.user));
         navigate("/");
         toast({
