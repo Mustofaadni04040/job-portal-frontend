@@ -41,6 +41,7 @@ export default function Login() {
           withCredentials: true,
         }
       );
+      console.log(res);
 
       if (res.data.success) {
         const token = Cookies.get("token");
