@@ -21,7 +21,7 @@ export default function SimillarJobs({ data }) {
         <div className="flex flex-col">
           <h1 className="text-lg md:text-xl font-medium">
             {" "}
-            {data?.title.slice(0, 22)}
+            {data?.title?.slice(0, 22)}
             {data?.title?.length > 22 && "..."}
           </h1>
           <div className="flex items-center gap-2">
@@ -68,7 +68,8 @@ export default function SimillarJobs({ data }) {
         </div>
 
         <div className="mt-3 text-xs md:text-sm text-slate-400">
-          {data?.description && replaceHTMLTags(data?.description.slice(0, 60))}
+          {data?.description &&
+            replaceHTMLTags(data?.description?.slice(0, 60))}
           ...
         </div>
       </div>

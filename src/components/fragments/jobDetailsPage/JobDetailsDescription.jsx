@@ -113,22 +113,23 @@ export default function JobDetailsDescription({
             </p>
             <div className="flex flex-col items-start md:flex-row md:items-center text-sm md:text-base gap-2">
               Skill Dibutuhkan :{" "}
-              {detailJob?.requirements[0] === "No requirements needed" ? (
-                <span className="border border-primary border-opacity-50 px-5 rounded-full">
-                  Tidak Dibutuhkan Skill
-                </span>
-              ) : (
-                <div className="flex items-center gap-2 flex-wrap">
-                  {detailJob?.requirements?.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="border border-primary border-opacity-50 px-5 rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              )}
+              {detailJob?.requirements?.length > 0 &&
+                (detailJob?.requirements[0] === "No requirements needed" ? (
+                  <span className="border border-primary border-opacity-50 px-5 rounded-full">
+                    Tidak Dibutuhkan Skill
+                  </span>
+                ) : (
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {detailJob?.requirements?.map((skill, index) => (
+                      <span
+                        key={index}
+                        className="border border-primary border-opacity-50 px-5 rounded-full"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
