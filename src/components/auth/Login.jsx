@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-// import { RadioGroup } from "../ui/radio-group";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
@@ -44,10 +43,7 @@ export default function Login() {
       console.log(res);
 
       if (res.data.success) {
-        // const token = Cookies.get("token");
-        // Cookies.set("token", token); // simpan token ke cookies
         Cookies.set("user", JSON.stringify(res.data.user));
-        // dispatch(setToken(token));
         dispatch(setUser(res.data.user));
         navigate("/");
         toast({

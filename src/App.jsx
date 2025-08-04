@@ -12,7 +12,7 @@ import Profile from "./pages/Profile";
 import JobDetails from "./pages/JobDetails";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { setToken, setUser } from "./redux/authSlice";
+import { setUser } from "./redux/authSlice";
 import { useDispatch } from "react-redux";
 import AuthRoute from "./components/fragments/AuthRoute";
 import Companies from "./pages/recruiter/Companies";
@@ -30,11 +30,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = Cookies.get("token");
     const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
 
-    if (token && user) {
-      dispatch(setToken(token));
+    if (user) {
       dispatch(setUser(user));
     }
   }, [dispatch]);

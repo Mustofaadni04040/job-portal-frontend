@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { setToken, setUser } from "@/redux/authSlice";
+import { setUser } from "@/redux/authSlice";
 import { ToastAction } from "../ui/toast";
 import { useToast } from "@/hooks/use-toast";
 import Cookies from "js-cookie";
@@ -38,7 +38,6 @@ export default function Navbar() {
         Cookies.remove("token");
         Cookies.remove("user");
         dispatch(setUser(null));
-        dispatch(setToken(null));
         dispatch(setSavedJobs([]));
         persister.purge();
         navigate("/");
