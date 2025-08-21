@@ -54,7 +54,7 @@ export default function Browse() {
       <h1 className="text-sm md:text-lg font-medium mb-5 mt-10 text-slate-600">
         Hasil pencarian untuk{" "}
         <span className="text-primary">{searchQuery}</span> (
-        <span className="font-bold">{browseJobs.length}</span>)
+        <span className="font-bold">{loading ? " " : browseJobs.length}</span>)
       </h1>
 
       {browseJobs.length === 0 && !loading && (
