@@ -26,14 +26,17 @@ export default function CompaniesTable() {
 
   useEffect(() => {
     const filteredCompany =
-      companies.length > 0 &&
-      companies.filter((company) => {
-        if (!searchCompany) {
-          return true;
-        }
+      companies?.length > 0
+        ? companies?.filter((company) => {
+            if (!searchCompany) {
+              return true;
+            }
 
-        return company.name.toLowerCase().includes(searchCompany.toLowerCase());
-      });
+            return company?.name
+              ?.toLowerCase()
+              .includes(searchCompany.toLowerCase());
+          })
+        : [];
     setFilterCompany(filteredCompany);
   }, [companies, searchCompany]);
 
